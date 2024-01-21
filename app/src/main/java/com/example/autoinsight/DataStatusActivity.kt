@@ -91,7 +91,6 @@ class DataStatusActivity : AppCompatActivity() {
             val selectedValue = autoCompleteTextView.text.toString()
             return selectedValue != "Select your answer"
         }
-
         val snext = this.findViewById<Button>(R.id.snext)
         snext.setOnClickListener {
             if (isValidSelection(serviceDone)) {
