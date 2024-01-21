@@ -1,0 +1,2 @@
+# autoStrings-master
+ 

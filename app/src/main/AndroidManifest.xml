@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AutoInsight"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity_washplans"
+            android:exported="false" />
+        <activity
+            android:name=".WashPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WashCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WashPersonalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WashOtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WashContactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DataFeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DataStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity android:name=".DataContactActivity">
+            <!-- Additional attributes may be present here -->
+        </activity>
+
+        <activity
+            android:name=".DataCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DataPersonalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DataOtpActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

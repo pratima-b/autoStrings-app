@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">autoStrings</string>
+    <string name="todo">TODO</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="enter_one_time_password_sent_on_your_mobile_number">Enter one time password sent on your mobile number</string>
+    <string name="didn_t_receive_otp">Didn\'t receive OTP?</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="submit">Submit</string>
+    <string name="enter_otp">enter otp</string>
+    <string name="autoinsight">autoInsight</string>
+    <string name="autoLogo">TODO</string>
+    <string name="splash">TODO</string>
+    <string name="q">TODO</string>
+    <string name="c">TODO</string>
+    <string name="s">TODO</string>
+    <string name="ss">TODO</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="fill_up_the_details">Fill up the details</string>
+    <string name="first_name">First Name *</string>
+    <string name="last_name">Last Name *</string>
+    <string name="address">Address *</string>
+    <string name="city">City *</string>
+    <string name="john">John</string>
+    <string name="house_number_amp_name"><![CDATA[House Number & Name *]]></string>
+    <string name="doe">Doe</string>
+    <string name="next">next</string>
+    <string name="pin_code">Pin Code *</string>
+    <string name="state">State *</string>
+    <string name="sss">TODO</string>
+    <string name="sderfd">TODO</string>
+    <string name="dfg">TODO</string>
+    <string name="qwertyuiop">Fill up the details</string>
+    <string name="contact_details">Contact Details</string>
+    <string name="mobile_number">Mobile Number *</string>
+    <string name="email_id">Email ID</string>
+    <string name="johndoe_gmail_com">johndoe@gmail.com</string>
+    <string name="_1234567890">1234567890</string>
+    <string name="verify">verify</string>
+    <string name="bv">TODO</string>
+    <string name="dvdv">TODO</string>
+    <string name="dvd">TODO</string>
+    <string name="dvsdzv">TODO</string>
+    <string name="car_details">Car Details</string>
+    <string name="qwertyujhbgvfd">Fill up the details</string>
+    <string name="manufacturer">Manufacturer *</string>
+    <string name="manufacturing_year">Manufacturing Year *</string>
+    <string name="car_model">Car Model *</string>
+    <string name="tata_motors">Tata Motors</string>
+    <string name="_2023">2023</string>
+    <string name="tata_altroz">Tata Altroz</string>
+    <string name="qwerftgyhgfdsasdfvgbn">next</string>
+
+
+    <string-array name="services">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="doneWhere">
+        <item>Authorised Workshop</item>
+        <item>Organised Multibrand</item>
+        <item>Local Garage</item>
+    </string-array>
+
+    <string-array name="scheduledWhen">
+        <item>This month</item>
+        <item>Next month</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="avg">
+        <item>0 - 1KM</item>
+        <item>1KM - 2KM</item>
+        <item>2KM - 3KM</item>
+        <item>3KM - above</item>
+    </string-array>
+
+    <string-array name="fuelType">
+        <item>Petrol</item>
+        <item>Diesel</item>
+        <item>CNG</item>
+        <item>Hybrid</item>
+        <item>Electric</item>
+    </string-array>
+
+    <string-array name="carSegment">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Luxury</item>
+    </string-array>
+
+    <string-array name="planList">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="manufacturers_array">
+        <item>TATA</item>
+        <item>Maruti</item>
+        <item>Mahindra &amp; Mahindra</item>
+        <item>Hyundai</item>
+        <item>Toyota</item>
+        <item>Volkswagen (VW)</item>
+        <item>Honda</item>
+        <item>GM/Chevrolet</item>
+        <item>BMW</item>
+        <item>Mercedes</item>
+    </string-array>
+
+
+</resources>

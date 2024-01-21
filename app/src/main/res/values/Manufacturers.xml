@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Manufacturers -->
+    <string name="tata">TATA</string>
+    <string name="maruti">Maruti</string>
+    <string name="mahindra">Mahindra &amp; Mahindra</string>
+    <string name="hyundai">Hyundai</string>
+    <string name="toyota">Toyota</string>
+    <string name="vw">Volkswagen (VW)</string>
+    <string name="honda">Honda</string>
+    <string name="chevrolet">GM/Chevrolet</string>
+    <string name="bmw">BMW</string>
+    <string name="mercedes">Mercedes</string>
+</resources>
