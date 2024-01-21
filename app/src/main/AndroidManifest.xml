@@ -18,9 +18,7 @@
         <activity
             android:name=".activity_washplans"
             android:exported="false" />
-        <activity
-            android:name=".WashPlanActivity"
-            android:exported="false" />
+
         <activity
             android:name=".WashCarActivity"
             android:exported="false" />
