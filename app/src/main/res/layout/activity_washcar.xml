@@ -62,10 +62,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="375dp"
+            android:id="@+id/linearLayout999"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/border"
             android:gravity="center"
@@ -74,21 +75,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:contentDescription="@string/dvdv"
+                    android:contentDescription="@string/dvsdzv"
                     android:src="@drawable/baseline_app_registration_24" />
 
                 <TextView
@@ -96,36 +97,37 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="Registration Number"
+                    android:text="Registration Number *"
                     android:textSize="17sp"
                     tools:ignore="TextContrastCheck" />
+
             </LinearLayout>
 
             <EditText
                 android:id="@+id/regNo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:autofillHints=""
                 android:background="@drawable/border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:hint="AB 99 XY 1234"
                 android:inputType="text"
-                android:minHeight="48dp"
                 android:padding="8dp"
                 android:textColor="@color/black"
+                android:autofillHints=""
                 tools:ignore="VisualLintTextFieldSize" />
+
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="375dp"
+            android:id="@+id/linearLayout55555"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/border"
             android:gravity="center"
             android:orientation="vertical"
@@ -133,31 +135,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:contentDescription="@string/dvdv"
-                    android:src="@drawable/baseline_car_repair_24" />
+                    android:src="@drawable/baseline_car_repair_24"
+                    android:contentDescription="@string/dvd" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/manufacturer"
+                    android:text="Manufacturer *"
                     android:textSize="17sp"
                     tools:ignore="TextContrastCheck" />
+
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -180,7 +183,9 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
+
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linearLayout3"
