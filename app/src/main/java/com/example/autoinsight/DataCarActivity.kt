@@ -18,6 +18,13 @@ import com.example.autoinsight.DataContactActivity.Companion.m
 
 class DataCarActivity : AppCompatActivity() {
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",
@@ -113,6 +120,8 @@ class DataCarActivity : AppCompatActivity() {
                     putExtra("carSegment", carSegment)
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             }
 
             val logout = this.findViewById<ImageView>(R.id.logout)
@@ -120,6 +129,8 @@ class DataCarActivity : AppCompatActivity() {
                 val intent = Intent(this, LoginActivity::class.java).apply {
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
             }
         }
     }

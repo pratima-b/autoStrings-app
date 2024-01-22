@@ -42,7 +42,12 @@ class DataContactActivity : AppCompatActivity() {
         lateinit var m: EditText
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
 
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datacontact)
@@ -74,6 +79,7 @@ class DataContactActivity : AppCompatActivity() {
                     putExtra("email", k.text.toString())
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
 
@@ -85,6 +91,7 @@ class DataContactActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
     }
 

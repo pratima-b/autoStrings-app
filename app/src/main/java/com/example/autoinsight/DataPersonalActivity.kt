@@ -17,6 +17,13 @@ import com.google.firebase.auth.FirebaseAuth
 class DataPersonalActivity : AppCompatActivity() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datapersonal)
@@ -54,6 +61,8 @@ class DataPersonalActivity : AppCompatActivity() {
                     putExtra("email", email)
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             }
         }
 
@@ -66,6 +75,8 @@ class DataPersonalActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
     }
 }

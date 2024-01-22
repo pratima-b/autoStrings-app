@@ -16,6 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 
 class DataFeedbackActivity : AppCompatActivity() {
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,6 +127,8 @@ class DataFeedbackActivity : AppCompatActivity() {
                     // Navigate to SelectActivity
                     val intent = Intent(this, SelectActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
                 }
                 .addOnFailureListener {
                     // Handle the error
@@ -134,6 +142,8 @@ class DataFeedbackActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
 
 

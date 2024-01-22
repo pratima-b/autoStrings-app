@@ -56,12 +56,16 @@ class SplashActivity : AppCompatActivity() {
                 // If a user is logged in, navigate to SelectActivity
                 val intent = Intent(this, SelectActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                 finish()
             } else {
                 // If not logged in, proceed to LoginActivity after the splash screen delay
                 val r = Runnable {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                     finish()
                 }
                 Handler(Looper.getMainLooper()).postDelayed(r, splashScreen.toLong())
@@ -103,12 +107,16 @@ class SplashActivity : AppCompatActivity() {
                     // If a user is logged in, navigate to SelectActivity
                     val intent = Intent(context, SelectActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                     finish()
                 } else {
                     // If not logged in, proceed to LoginActivity after the splash screen delay
                     val r = Runnable {
                         val intent = Intent(context, LoginActivity::class.java)
                         startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                         finish()
                     }
                     Handler(Looper.getMainLooper()).postDelayed(r, splashScreen.toLong())

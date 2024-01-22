@@ -13,6 +13,14 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
 
 class activity_washplans : AppCompatActivity() {
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
     private lateinit var myImageViews: Array<ImageView>
     private lateinit var myButtons: Array<Button>
     private val normalImageResources = arrayOf(
@@ -143,6 +151,8 @@ class activity_washplans : AppCompatActivity() {
                         val intent = Intent(this, PaymentActivity::class.java)
                         intent.putExtra("planSelected", selectedPlan)
                         startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                     }
                     .addOnFailureListener {
                         showToast("Failed to save data to Firestore")
@@ -160,6 +170,8 @@ class activity_washplans : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
 
 

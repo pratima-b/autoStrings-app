@@ -13,6 +13,12 @@ import com.hbb20.CountryCodePicker
 
 class WashContactActivity : AppCompatActivity() {
     val firebaseAuth = FirebaseAuth.getInstance()
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
 
     companion object{
         @SuppressLint("StaticFieldLeak")
@@ -73,6 +79,8 @@ class WashContactActivity : AppCompatActivity() {
                     putExtra("email", k.text.toString())
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             }
         }
 
@@ -84,6 +92,9 @@ class WashContactActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+
         }
     }
     private fun isValidEmail(email: String): Boolean {

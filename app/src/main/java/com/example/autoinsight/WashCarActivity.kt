@@ -14,6 +14,13 @@ import com.example.autoinsight.WashContactActivity.Companion.d
 import com.example.autoinsight.WashContactActivity.Companion.e
 import com.example.autoinsight.WashContactActivity.Companion.f
 class WashCarActivity : AppCompatActivity() {
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",
@@ -109,6 +116,8 @@ class WashCarActivity : AppCompatActivity() {
                     putExtra("carSegment", carSegment)
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             }
 
             val logout = this.findViewById<ImageView>(R.id.logout)
@@ -116,6 +125,8 @@ class WashCarActivity : AppCompatActivity() {
                 val intent = Intent(this, LoginActivity::class.java).apply {
                 }
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
             }
         }
     }

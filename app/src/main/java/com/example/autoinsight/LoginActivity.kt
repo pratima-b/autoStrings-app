@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         register.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
@@ -71,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, loweremail.toString()+" Login successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, SelectActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
                     // Login failed
                     // Handle login failure, show an error message, etc.

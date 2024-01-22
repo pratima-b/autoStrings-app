@@ -26,7 +26,12 @@ import com.example.autoinsight.DataContactActivity.Companion.l
 import com.example.autoinsight.DataContactActivity.Companion.m
 
 class DataStatusActivity : AppCompatActivity() {
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
 
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datastatus)
@@ -139,6 +144,9 @@ class DataStatusActivity : AppCompatActivity() {
                             putExtra("whenScheduled", whenScheduled.text.toString())
                         }
                         startActivity(intent)
+
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
                     } else {
                         Toast.makeText(this, "Please fill all the mandatory * fields", Toast.LENGTH_SHORT).show()
                     }
@@ -153,6 +161,8 @@ class DataStatusActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java).apply {
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
     }
 }

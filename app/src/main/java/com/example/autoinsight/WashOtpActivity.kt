@@ -12,7 +12,12 @@ class WashOtpActivity : AppCompatActivity() {
     private lateinit var resendTextView: TextView
     private lateinit var countDownTimer: CountDownTimer
     var resendEnabled: Boolean = false
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
 
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,6 +36,8 @@ class WashOtpActivity : AppCompatActivity() {
                 putExtra("email", email)   // Pass the email data to DataPersonalActivity
             }
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
         }
 
 

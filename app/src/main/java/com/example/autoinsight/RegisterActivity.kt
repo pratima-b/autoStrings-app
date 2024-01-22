@@ -17,6 +17,12 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val db = FirebaseFirestore.getInstance()
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -83,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
                                     val intent = Intent(this, LoginActivity::class.java).apply {
                                     }
                                     startActivity(intent)
-
+                                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                                     // Redirect to the next activity or perform other actions
 
                                 }
