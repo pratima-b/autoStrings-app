@@ -157,7 +157,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Is payment completed? *"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -176,7 +177,8 @@
                     android:background="@drawable/border"
                     android:fontFamily="@font/montserrat_medium"
                     android:inputType="none"
-                    android:text="Select your answer" />
+                    android:text="Select your answer"
+                    style="@style/Text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -196,7 +198,8 @@
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize"/>
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
     </LinearLayout>
 
 

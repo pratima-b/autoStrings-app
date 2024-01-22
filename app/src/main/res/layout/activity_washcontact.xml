@@ -115,7 +115,8 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/mobile_number"
                     android:textSize="17sp"
-                    tools:ignore="TextContrastCheck" />
+                    tools:ignore="TextContrastCheck"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -132,7 +133,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
 
         </LinearLayout>
@@ -174,7 +176,8 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Email ID *"
                     android:textSize="17sp"
-                    tools:ignore="TextContrastCheck" />
+                    tools:ignore="TextContrastCheck"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -191,7 +194,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 tools:ignore="TextFields,VisualLintTextFieldSize"
-                android:autofillHints="" />
+                android:autofillHints=""
+                style="@style/EditTextStyle"/>
 
 
         </LinearLayout>
@@ -209,7 +213,8 @@
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize"/>
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
     </LinearLayout>
 
 

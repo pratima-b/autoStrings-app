@@ -98,7 +98,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Is Service done ? *"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -118,6 +119,7 @@
                     android:background="@drawable/border"
                     android:inputType="none"
                     android:text="Select your answer"
+                    style="@style/Text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -152,7 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:src="@drawable/baseline_person_24"
-                    android:contentDescription="@string/c" />
+                    android:contentDescription="@string/c"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -160,6 +163,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Where?"
+                    style="@style/Text"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -180,6 +184,7 @@
                     android:background="@drawable/border"
                     android:inputType="none"
                     android:text="Select your answer"
+                    style="@style/Text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -222,7 +227,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="When it is scheduled?"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -241,6 +247,7 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:background="@drawable/border"
                     android:inputType="none"
+                    style="@style/Text"
                     android:text="Select your answer"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -283,7 +290,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Where often you do your vehicle's servicing? *"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -303,6 +311,7 @@
                     android:background="@drawable/border"
                     android:inputType="none"
                     android:text="Select your answer"
+                    style="@style/Text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -344,7 +353,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Average running of vehicle per month *"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -364,6 +374,7 @@
                     android:background="@drawable/border"
                     android:inputType="none"
                     android:text="Select your answer"
+                    style="@style/Text"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -405,7 +416,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Total running of vehicle (in KM) *"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <EditText
@@ -421,7 +433,8 @@
                 android:inputType="number"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
         </LinearLayout>
         <Button
             android:id="@+id/snext"
@@ -438,7 +451,8 @@
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize"/>
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
 
     </LinearLayout>
 

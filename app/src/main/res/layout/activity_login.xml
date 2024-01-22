@@ -13,24 +13,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="319dp"
-        android:layout_height="259dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="center"
-        android:src="@drawable/undraw_mobile_login_re_9ntv"
-        android:contentDescription="@string/todo" />
+        <ImageView
+            android:layout_width="319dp"
+            android:layout_height="259dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/undraw_mobile_login_re_9ntv"
+            android:contentDescription="@string/todo" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:text="Login"
-        android:textColor="@color/black"
-        android:textSize="35sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="@color/black"
+            android:textSize="35sp"/>
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -67,7 +67,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Employee ID"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <EditText
@@ -83,6 +84,7 @@
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="@color/black"
+                style="@style/EditTextStyle"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
         </LinearLayout>
 
@@ -121,7 +123,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Password"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
                 <ImageView
                     android:id="@+id/showHide"
@@ -147,9 +150,10 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:autofillHints="" />
+                android:autofillHints=""
+                style="@style/EditTextStyle"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/loginButton"
@@ -163,7 +167,8 @@
             android:textAllCaps="true"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize"/>
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
 
         <TextView
             android:id="@+id/register"

@@ -8,6 +8,7 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +99,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/first_name"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
             </LinearLayout>
 
             <EditText
@@ -114,7 +116,8 @@
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +157,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/last_name"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -171,7 +175,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
 
@@ -206,7 +211,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/address"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -223,7 +229,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
             <EditText
                 android:id="@+id/city"
@@ -238,7 +245,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
             <EditText
                 android:id="@+id/state"
@@ -253,7 +261,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
             <EditText
                 android:id="@+id/pinCode"
@@ -268,7 +277,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
 
@@ -287,7 +297,8 @@
             android:textAllCaps="true"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize" />
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
 
     </LinearLayout>
 

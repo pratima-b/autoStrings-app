@@ -70,7 +70,8 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Email ID *"
                     android:textSize="17sp"
-                    tools:ignore="TextContrastCheck" />
+                    tools:ignore="TextContrastCheck"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -87,7 +88,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 tools:ignore="TextFields,VisualLintTextFieldSize"
-                android:autofillHints="" />
+                android:autofillHints=""
+                style="@style/EditTextStyle"/>
 
 
         </LinearLayout>
@@ -128,7 +130,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Password *"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -145,7 +148,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
         <LinearLayout
@@ -183,7 +187,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Mobile Number *"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -200,7 +205,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
 
@@ -239,7 +245,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="First Name *"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -256,7 +263,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
 
@@ -296,7 +304,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Last Name *"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
             </LinearLayout>
 
@@ -313,7 +322,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
 
         </LinearLayout>
 
@@ -355,7 +365,8 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Employee ID * "
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    style="@style/Text"/>
 
                 <Button
                     android:id="@+id/generateButton"
@@ -368,7 +379,8 @@
                     android:textAllCaps="true"
                     android:textSize="12sp"
                     app:backgroundTint="@null"
-                    tools:ignore="VisualLintButtonSize" />
+                    tools:ignore="VisualLintButtonSize"
+                    style="@style/btnText"/>
             </LinearLayout>
 
             <TextView
@@ -384,7 +396,8 @@
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize" />
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck,VisualLintTextFieldSize"
+                style="@style/EditTextStyle"/>
         </LinearLayout>
 
 
@@ -401,6 +414,7 @@
             android:textAllCaps="true"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize" />
+            tools:ignore="VisualLintButtonSize"
+            style="@style/btnText"/>
     </LinearLayout>
 </ScrollView>

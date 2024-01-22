@@ -3,7 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:backgroundTint="@color/white"
+    >
 
     <TextView
         android:id="@+id/messageTextView"
@@ -11,11 +13,14 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Turn on your internet"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textAppearance="?android:textAppearanceMedium"
+        style="@style/Text"
+        />
 
     <Button
         android:id="@+id/closeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Close" />
+        android:text="Close"
+        style="@style/btnText"/>
 </LinearLayout>

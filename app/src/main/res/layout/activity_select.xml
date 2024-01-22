@@ -56,7 +56,8 @@
                 android:textAllCaps="true"
                 android:textSize="15sp"
                 app:backgroundTint="@null"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize"
+                style="@style/btnText"/>
 
             <ImageView
                 android:id="@+id/logoefvdut"
@@ -84,7 +85,8 @@
                 android:textAllCaps="true"
                 android:textSize="15sp"
                 app:backgroundTint="@null"
-                tools:ignore="VisualLintButtonSize" />
+                tools:ignore="VisualLintButtonSize"
+                style="@style/btnText"/>
 
 
         </LinearLayout>
