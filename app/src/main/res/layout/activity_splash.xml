@@ -25,8 +25,7 @@
         android:id="@+id/autoStringsLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="524d
-        android:contentDescription="@string/autoLogo"
+        android:layout_marginTop="524dp"
         android:foregroundGravity="center"
         android:src="@drawable/splash_app_logo"
         app:layout_constraintEnd_toEndOf="parent"
