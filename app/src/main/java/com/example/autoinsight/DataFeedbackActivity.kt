@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +28,39 @@ class DataFeedbackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datafeedback)
+
+        val button1 = this.findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataContactActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+
+        })
+
+        val button2 = this.findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataPersonalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button3 = this.findViewById<ImageButton>(R.id.button3)
+        button3.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataCarActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button4 = this.findViewById<ImageButton>(R.id.button4)
+        button4.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataStatusActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
 
         val services = resources.getStringArray(R.array.services)
         val arrayAdapterAns: ArrayAdapter<String> = ArrayAdapter(this, R.layout.dropdown, services)

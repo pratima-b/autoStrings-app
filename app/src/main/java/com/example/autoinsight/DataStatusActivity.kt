@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -35,6 +36,32 @@ class DataStatusActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datastatus)
+
+
+        val button1 = this.findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataContactActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button2 = this.findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataPersonalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button3 = this.findViewById<ImageButton>(R.id.button3)
+        button3.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, DataCarActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
 
         // Retrieve the values passed from DataCarActivity
         val firstName = intent.getStringExtra("firstName")
@@ -96,7 +123,7 @@ class DataStatusActivity : AppCompatActivity() {
             val selectedValue = autoCompleteTextView.text.toString()
             return selectedValue != "Select your answer"
         }
-        val snext = this.findViewById<Button>(R.id.snext)
+        val snext = this.findViewById<Button>(R.id.nextbtn)
         snext.setOnClickListener {
             if (isValidSelection(serviceDone)) {
                 if (selectedText == "Yes") {
@@ -120,6 +147,7 @@ class DataStatusActivity : AppCompatActivity() {
                             putExtra("avgRunning", avgRunning.text.toString())
                         }
                         startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     } else {
                         Toast.makeText(this, "Please fill all the mandatory * fields", Toast.LENGTH_SHORT).show()
                     }
@@ -144,7 +172,6 @@ class DataStatusActivity : AppCompatActivity() {
                             putExtra("whenScheduled", whenScheduled.text.toString())
                         }
                         startActivity(intent)
-
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
                     } else {

@@ -3,9 +3,11 @@ package com.example.autoinsight
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import com.example.autoinsight.WashContactActivity.Companion.a
 import com.example.autoinsight.WashContactActivity.Companion.b
@@ -44,6 +46,20 @@ class WashCarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washcar)
+
+        val button1 = this.findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashContactActivity::class.java)
+            startActivity(intent)
+        })
+
+        val button2 = this.findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashPersonalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
 
         /*g = this.findViewById(R.id.manf)
         h = this.findViewById(R.id.model)

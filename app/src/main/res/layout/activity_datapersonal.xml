@@ -51,14 +51,103 @@
                 android:textSize="15sp"/>
 
 
-            <ImageView
-                android:layout_width="350dp"
-                android:layout_height="50dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:contentDescription="@string/q"
-                android:src="@drawable/two"
-                tools:ignore="ImageContrastCheck" />
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/button1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/one"
+                    android:fontFamily="@font/montserrat"
+                    android:text="1"
+                    android:textColor="#000000"
+                    android:textSize="7dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/sss"
+                    android:src="@drawable/dash"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageButton
+                    android:id="@+id/button2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/two"
+                    android:fontFamily="@font/montserrat"
+                    android:text="2"
+                    android:textColor="#fff"
+                    android:textSize="6dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/sss"
+                    android:src="@drawable/dash"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageButton
+                    android:id="@+id/button3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/threestroke"
+                    android:fontFamily="@font/montserrat"
+                    android:text="3"
+                    android:textColor="#fff"
+                    android:textSize="6dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/sss"
+                    android:src="@drawable/dash"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageButton
+                    android:id="@+id/button4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/fourstroke"
+                    android:fontFamily="@font/montserrat"
+                    android:text="4"
+                    android:textColor="#fff"
+                    android:textSize="6dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/sss"
+                    android:src="@drawable/dash"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageButton
+                    android:id="@+id/button5"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/fivestroke"
+                    android:fontFamily="@font/montserrat"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:textSize="6dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -3,7 +3,9 @@ package com.example.autoinsight
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import com.example.autoinsight.WashContactActivity.Companion.a
 import com.example.autoinsight.WashContactActivity.Companion.b
@@ -26,7 +28,16 @@ class WashPersonalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datapersonal)
 
-       a = this.findViewById(R.id.firstName)
+        val button1 = this.findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashContactActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+
+        a = this.findViewById(R.id.firstName)
       b = this.findViewById(R.id.lastName)
       c = this.findViewById(R.id.houseNo)
         d = this.findViewById(R.id.city)

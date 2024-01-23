@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.net.ConnectivityManager
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -41,6 +42,32 @@ class activity_washplans : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
 
+
+        val button1 = this.findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashContactActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button2 = this.findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashPersonalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+        val button3 = this.findViewById<ImageButton>(R.id.button3)
+        button3.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, WashCarActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        })
+
+
         // Initialize arrays for ImageView and Button references
         myImageViews = arrayOf(
             findViewById(R.id.imageView3),
@@ -49,10 +76,10 @@ class activity_washplans : AppCompatActivity() {
             findViewById(R.id.imageView6)
         )
         myButtons = arrayOf(
-            findViewById(R.id.button1),
-            findViewById(R.id.button7),
-            findViewById(R.id.button6),
-            findViewById(R.id.button5)
+            findViewById(R.id.button499),
+            findViewById(R.id.button699),
+            findViewById(R.id.button799),
+            findViewById(R.id.button999)
         )
 
         var proceedButton = findViewById<Button>(R.id.proceedbtn)
