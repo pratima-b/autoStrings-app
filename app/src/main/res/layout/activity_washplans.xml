@@ -150,45 +150,16 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="1000px"
+            android:layout_height="654px"
             android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:src="@drawable/group_13" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/plan1" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/plan2" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/plan3" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/plan4" />
+                android:id="@+id/fetched"
+                android:layout_width="1000px"
+                android:layout_height="654px" />
 
 
         </LinearLayout>
@@ -198,76 +169,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp">
-
-            <Button
-                android:id="@+id/button499"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
-                android:textSize="13.5sp"
-                android:text="₹ 499/- \n Per Month"
-                android:textAllCaps="false"
-                android:layout_marginLeft="20dp"
-                android:backgroundTint="@color/blue"
-                android:background="@drawable/btnblue"
-                style="@style/btnText"/>
-
-            <Button
-                android:id="@+id/button699"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
-                android:textSize="13.5sp"
-                android:backgroundTint="@color/blue"
-                android:background="@drawable/btnblue"
-                android:text="₹ 699/- \n Per Month"
-                android:textAllCaps="false"
-                android:layout_marginLeft="10dp"
-                style="@style/btnText"/>
-
-            <Button
-                android:id="@+id/button799"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
-                android:textSize="13.5sp"
-                style="@style/btnText"
-                android:text="₹ 799/- \n Per Month"
-                android:textAllCaps="false"
-                android:layout_marginLeft="10dp"
-                android:backgroundTint="@color/blue"
-                android:background="@drawable/btnblue"/>
-
-            <Button
-                android:id="@+id/button999"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
-                android:textSize="13.5sp"
-                android:text="₹ 999/- \n Per Month"
-                android:textAllCaps="false"
-                android:layout_marginLeft="10dp"
-                style="@style/btnText"
-                android:backgroundTint="@color/blue"
-                android:background="@drawable/btnblue"/>
-
-        </LinearLayout>
+            android:layout_marginTop="40dp"/>
 
 
         <Button
             android:id="@+id/proceedbtn"
+            style="@style/btnText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
-            android:text="Proceed"
-            android:background="@drawable/custom_btn"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
-            android:textAllCaps="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_btn"
+            android:padding="10dp"
+            android:text="Proceed"
+            android:textAllCaps="true"
             android:textSize="15sp"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize"
-            style="@style/btnText"/>
+            tools:ignore="VisualLintButtonSize" />
 
     </LinearLayout>
 
