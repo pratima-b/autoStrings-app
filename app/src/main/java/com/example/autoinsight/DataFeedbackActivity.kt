@@ -66,12 +66,15 @@ class DataFeedbackActivity : AppCompatActivity() {
         val arrayAdapterAns: ArrayAdapter<String> = ArrayAdapter(this, R.layout.dropdown, services)
         val ans = findViewById<AutoCompleteTextView>(R.id.ans)
         ans.setAdapter(arrayAdapterAns)
-
         val fnameyes = findViewById<EditText>(R.id.fnameyes)
         val lnameyes = findViewById<EditText>(R.id.lnameyes)
+        val contactNumber1 = findViewById<EditText>(R.id.contactNum1)
+        val contactNumber2 = findViewById<EditText>(R.id.contactNum2)
 
         fnameyes.visibility = View.GONE
         lnameyes.visibility = View.GONE
+        contactNumber1.visibility = View.GONE
+        contactNumber2.visibility = View.GONE
 
         val edit1 = findViewById<EditText>(R.id.edit1)
         val edit2 = findViewById<EditText>(R.id.edit2)

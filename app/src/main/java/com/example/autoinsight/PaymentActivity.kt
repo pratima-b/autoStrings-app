@@ -82,10 +82,9 @@ class PaymentActivity : AppCompatActivity() {
 
         var obtainedPlan: String
 
-        val displayPlan = this.findViewById<TextView>(R.id.displayPlan)
+
         obtainedPlan = intent.getStringExtra("planSelected").toString()
 
-        displayPlan.text = " Your Selected Plan: ₹" + obtainedPlan
 
 
         submitButton.setOnClickListener {
