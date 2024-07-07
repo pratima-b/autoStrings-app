@@ -108,7 +108,7 @@ class activity_washplans : AppCompatActivity() {
                 val userEmail = currentUserEmail
 
                 val data = hashMapOf(
-                    "collectedBy" to userEmail,
+                    "collectedBy" to currentUserEmail,
                     "firstName" to firstName,
                     "lastName" to lastName,
                     "houseNo" to houseNo,
@@ -121,7 +121,8 @@ class activity_washplans : AppCompatActivity() {
                     "carModel" to carModel,
                     "fuelType" to fuelType,
                     "carSegment" to carSegment,
-                    "selectedPlan" to selectedPlan
+                    "selectedPlan" to selectedPlan,
+                    "paymentStatus" to paymentStatus
                 )
 
                 docRef.set(data)
@@ -129,6 +130,7 @@ class activity_washplans : AppCompatActivity() {
 
                         val intent = Intent(this, SelectActivity::class.java)
                         intent.putExtra("planSelected", selectedPlan)
+                        intent.putExtra("paymentStatus", paymentStatus)
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 

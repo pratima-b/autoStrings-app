@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -162,9 +163,13 @@ class DataFeedbackActivity : AppCompatActivity() {
                 "answer" to selectedText, // Store selectedText
                 "fNameYes" to if (selectedText == "Yes") fnameyes.text.toString() else "",
                 "lNameYes" to if (selectedText == "Yes") lnameyes.text.toString() else "",
+                "contactNumber1" to if (selectedText == "Yes") contactNumber1.text.toString() else "",
+                "contactNumber2" to if (selectedText == "Yes") contactNumber2.text.toString() else "",
                 "Reasons behind selecting service center" to edit1.text.toString(),
                 "edit2" to edit2.text.toString()
             )
+
+            Log.d("Debug", "userData: $userData")
 
             // Add the user data (HashMap) to Firestore
             currentUserDoc.set(userData)
