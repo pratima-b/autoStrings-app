@@ -21,12 +21,16 @@ import com.example.autoinsight.DataContactActivity.Companion.m
 class DataCarActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
+    var firstPressTime: Long = 0
+
     override fun onBackPressed() {
-
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
-
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",

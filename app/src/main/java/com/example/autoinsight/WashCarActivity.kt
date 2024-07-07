@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.autoinsight.WashContactActivity.Companion.a
 import com.example.autoinsight.WashContactActivity.Companion.b
 import com.example.autoinsight.WashContactActivity.Companion.c
@@ -18,10 +19,15 @@ import com.example.autoinsight.WashContactActivity.Companion.f
 class WashCarActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
+    var firstPressTime: Long = 0
 
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",

@@ -18,10 +18,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DataFeedbackActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
+    var firstPressTime: Long = 0
 
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
 
     @SuppressLint("MissingInflatedId")

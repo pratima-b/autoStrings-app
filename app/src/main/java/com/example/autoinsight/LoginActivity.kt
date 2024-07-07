@@ -18,6 +18,17 @@ import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
 
+    var firstPressTime: Long = 0
+
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
+    }
+
     private lateinit var passwordEditText: EditText
     private lateinit var showHide: ImageView
 
