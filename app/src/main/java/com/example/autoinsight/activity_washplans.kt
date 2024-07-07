@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.net.ConnectivityManager
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
@@ -17,12 +20,16 @@ import com.bumptech.glide.Glide
 class activity_washplans : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
+    var firstPressTime: Long = 0
+
     override fun onBackPressed() {
-
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
@@ -63,19 +70,19 @@ class activity_washplans : AppCompatActivity() {
 
         })
 
+        val proceedButton = findViewById<Button>(R.id.proceedbtn)
+        val selectedPlanEditText = findViewById<EditText>(R.id.lastNameuser)
+        val paymentStatusDropdown = findViewById<AutoCompleteTextView>(R.id.ans2)
 
-
-
-        var proceedButton = findViewById<Button>(R.id.proceedbtn)
-
-        // Set click listeners for each button and its corresponding ImageView
-
+        // Setup the dropdown menu
+        val paymentStatusOptions = arrayOf("Yes", "No")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, paymentStatusOptions)
+        paymentStatusDropdown.setAdapter(adapter)
 
         proceedButton.setOnClickListener {
-            // Check if the internet is available
             if (isNetworkAvailable()) {
-                // Extract the selected plan
-                var selectedPlan = ""
+                val selectedPlan = selectedPlanEditText.text.toString()
+                val paymentStatus = paymentStatusDropdown.text.toString()
 
 
                 // Extract the intented data received from the previous activity
@@ -120,7 +127,7 @@ class activity_washplans : AppCompatActivity() {
                 docRef.set(data)
                     .addOnSuccessListener {
 
-                        val intent = Intent(this, PaymentActivity::class.java)
+                        val intent = Intent(this, SelectActivity::class.java)
                         intent.putExtra("planSelected", selectedPlan)
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -148,6 +155,7 @@ class activity_washplans : AppCompatActivity() {
 
 
     }
+
 
 
     private fun isNetworkAvailable(): Boolean {

@@ -17,13 +17,20 @@ import com.example.autoinsight.DataContactActivity.Companion.f
 import com.google.firebase.auth.FirebaseAuth
 
 class DataPersonalActivity : AppCompatActivity() {
+
     val firebaseAuth = FirebaseAuth.getInstance()
 
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
 
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    var firstPressTime: Long = 0
+
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
 
 

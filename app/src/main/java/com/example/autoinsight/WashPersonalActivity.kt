@@ -19,10 +19,15 @@ import com.google.firebase.auth.FirebaseAuth
 class WashPersonalActivity : AppCompatActivity() {
     val firebaseAuth = FirebaseAuth.getInstance()
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
+    var firstPressTime: Long = 0
 
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +43,11 @@ class WashPersonalActivity : AppCompatActivity() {
 
 
         a = this.findViewById(R.id.firstName)
-      b = this.findViewById(R.id.lastName)
-      c = this.findViewById(R.id.houseNo)
+        b = this.findViewById(R.id.lastName)
+        c = this.findViewById(R.id.houseNo)
         d = this.findViewById(R.id.city)
         e = this.findViewById(R.id.state)
-     f = this.findViewById(R.id.pinCode)
+        f = this.findViewById(R.id.pinCode)
         // Retrieve the mobile and email data from the intent
         val mobile = intent.getStringExtra("mobile")
         val email = intent.getStringExtra("email")

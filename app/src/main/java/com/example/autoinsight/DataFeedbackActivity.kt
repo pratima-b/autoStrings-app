@@ -18,10 +18,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class DataFeedbackActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
+    var firstPressTime: Long = 0
 
-        super.onBackPressed()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
     }
 
     @SuppressLint("MissingInflatedId")
@@ -66,12 +71,15 @@ class DataFeedbackActivity : AppCompatActivity() {
         val arrayAdapterAns: ArrayAdapter<String> = ArrayAdapter(this, R.layout.dropdown, services)
         val ans = findViewById<AutoCompleteTextView>(R.id.ans)
         ans.setAdapter(arrayAdapterAns)
-
         val fnameyes = findViewById<EditText>(R.id.fnameyes)
         val lnameyes = findViewById<EditText>(R.id.lnameyes)
+        val contactNumber1 = findViewById<EditText>(R.id.contactNum1)
+        val contactNumber2 = findViewById<EditText>(R.id.contactNum2)
 
         fnameyes.visibility = View.GONE
         lnameyes.visibility = View.GONE
+        contactNumber1.visibility = View.GONE
+        contactNumber2.visibility = View.GONE
 
         val edit1 = findViewById<EditText>(R.id.edit1)
         val edit2 = findViewById<EditText>(R.id.edit2)
@@ -113,10 +121,15 @@ class DataFeedbackActivity : AppCompatActivity() {
             if (selectedText == "Yes") {
                 fnameyes.visibility = View.VISIBLE
                 lnameyes.visibility = View.VISIBLE
+                contactNumber1.visibility = View.VISIBLE
+                contactNumber2.visibility = View.VISIBLE
+
             } else {
                 selectedText = "No"
                 fnameyes.visibility = View.GONE
                 lnameyes.visibility = View.GONE
+                contactNumber1.visibility = View.GONE
+                contactNumber2.visibility = View.GONE
             }
         }
 

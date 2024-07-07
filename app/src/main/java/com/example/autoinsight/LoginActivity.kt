@@ -18,6 +18,17 @@ import java.util.Locale
 
 class LoginActivity : AppCompatActivity() {
 
+    var firstPressTime: Long = 0
+
+    override fun onBackPressed() {
+        if (firstPressTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()  // This will close all activities and exit the app
+        } else {
+            Toast.makeText(baseContext, "Press Back again to Exit", Toast.LENGTH_SHORT).show()
+        }
+        firstPressTime = System.currentTimeMillis()
+    }
+
     private lateinit var passwordEditText: EditText
     private lateinit var showHide: ImageView
 
@@ -38,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-                loginUser(email, password)
+            loginUser(email, password)
 
         }
 
@@ -50,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-   private fun togglePasswordVisibility() {
+    private fun togglePasswordVisibility() {
         if (passwordEditText.inputType == (TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD)) {
             passwordEditText.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             showHide.setImageResource(R.drawable.ic_show_eye)
@@ -68,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Login was successful
-                        val user = auth.currentUser
+                    val user = auth.currentUser
                     Toast.makeText(this, loweremail.toString()+" Login successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, SelectActivity::class.java)
                     startActivity(intent)
