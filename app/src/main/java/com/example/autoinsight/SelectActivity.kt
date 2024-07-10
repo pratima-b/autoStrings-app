@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 
 class SelectActivity : AppCompatActivity() {
+
+
 
     @Deprecated("Deprecated in Java")
     var firstPressTime: Long = 0
@@ -23,6 +26,13 @@ class SelectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select)
+
+
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
+
 
         val dataCollection = this.findViewById<Button>(R.id.dataCollectionBtn)
         dataCollection.setOnClickListener {
@@ -40,13 +50,17 @@ class SelectActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
-        val logout = this.findViewById<ImageView>(R.id.logout)
-        logout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java).apply {
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
-        }
     }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
+    }
+
 }

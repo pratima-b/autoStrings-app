@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">autoStrings</string>
+    <string name="app_name">AutoInsights</string>
     <string name="todo">TODO</string>
     <string name="otp_verification">OTP Verification</string>
     <string name="enter_one_time_password_sent_on_your_mobile_number">Enter one time password sent on your mobile number</string>

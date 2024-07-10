@@ -15,7 +15,7 @@ import com.example.autoinsight.DataContactActivity.Companion.h
 import com.example.autoinsight.DataContactActivity.Companion.i
 import com.example.autoinsight.DataContactActivity.Companion.l
 import com.example.autoinsight.DataContactActivity.Companion.m
-
+import com.google.firebase.auth.FirebaseAuth
 
 
 class DataCarActivity : AppCompatActivity() {
@@ -54,6 +54,11 @@ class DataCarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datacar)
+
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)
         button1.setOnClickListener(View.OnClickListener {
@@ -146,14 +151,17 @@ class DataCarActivity : AppCompatActivity() {
 
             }
 
-            val logout = this.findViewById<ImageView>(R.id.logout)
-            logout.setOnClickListener {
-                val intent = Intent(this, LoginActivity::class.java).apply {
-                }
-                startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
-            }
         }
+    }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
     }
 }

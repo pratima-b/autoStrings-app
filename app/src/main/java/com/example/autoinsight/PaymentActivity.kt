@@ -12,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import org.w3c.dom.Text
 
 class PaymentActivity : AppCompatActivity() {
@@ -30,6 +31,11 @@ class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
+
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)
         button1.setOnClickListener(View.OnClickListener {
@@ -105,18 +111,21 @@ class PaymentActivity : AppCompatActivity() {
         }
 
 
-        val logout = this.findViewById<ImageView>(R.id.logout)
-        logout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java).apply {
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
-        }
-
 
 
     }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
+    }
+
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

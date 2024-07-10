@@ -85,8 +85,11 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else {
-                    // Login failed
-                    // Handle login failure, show an error message, etc.
+                    Toast.makeText(
+                        applicationContext,
+                        "Please Enter Valid Employee ID or Password",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }

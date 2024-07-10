@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -33,6 +34,12 @@ class DataFeedbackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datafeedback)
+
+
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)
         button1.setOnClickListener(View.OnClickListener {
@@ -162,9 +169,13 @@ class DataFeedbackActivity : AppCompatActivity() {
                 "answer" to selectedText, // Store selectedText
                 "fNameYes" to if (selectedText == "Yes") fnameyes.text.toString() else "",
                 "lNameYes" to if (selectedText == "Yes") lnameyes.text.toString() else "",
+                "contactNumber1" to if (selectedText == "Yes") contactNumber1.text.toString() else "",
+                "contactNumber2" to if (selectedText == "Yes") contactNumber2.text.toString() else "",
                 "Reasons behind selecting service center" to edit1.text.toString(),
                 "edit2" to edit2.text.toString()
             )
+
+            Log.d("Debug", "userData: $userData")
 
             // Add the user data (HashMap) to Firestore
             currentUserDoc.set(userData)
@@ -184,15 +195,16 @@ class DataFeedbackActivity : AppCompatActivity() {
         }
 
 
-        val logout = this.findViewById<ImageView>(R.id.logout)
-        logout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java).apply {
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
-        }
+    }
 
-
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
     }
 }

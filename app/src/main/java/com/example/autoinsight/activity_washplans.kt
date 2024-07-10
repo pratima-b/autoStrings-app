@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 
 class activity_washplans : AppCompatActivity() {
 
@@ -34,6 +35,10 @@ class activity_washplans : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
 
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
 
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
 
@@ -108,7 +113,7 @@ class activity_washplans : AppCompatActivity() {
                 val userEmail = currentUserEmail
 
                 val data = hashMapOf(
-                    "collectedBy" to userEmail,
+                    "collectedBy" to currentUserEmail,
                     "firstName" to firstName,
                     "lastName" to lastName,
                     "houseNo" to houseNo,
@@ -121,7 +126,8 @@ class activity_washplans : AppCompatActivity() {
                     "carModel" to carModel,
                     "fuelType" to fuelType,
                     "carSegment" to carSegment,
-                    "selectedPlan" to selectedPlan
+                    "selectedPlan" to selectedPlan,
+                    "paymentStatus" to paymentStatus
                 )
 
                 docRef.set(data)
@@ -129,6 +135,7 @@ class activity_washplans : AppCompatActivity() {
 
                         val intent = Intent(this, SelectActivity::class.java)
                         intent.putExtra("planSelected", selectedPlan)
+                        intent.putExtra("paymentStatus", paymentStatus)
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
@@ -144,19 +151,17 @@ class activity_washplans : AppCompatActivity() {
 
 
 
-        val logout = this.findViewById<ImageView>(R.id.logout)
-        logout.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java).apply {
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
-        }
-
-
     }
 
-
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
+    }
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =

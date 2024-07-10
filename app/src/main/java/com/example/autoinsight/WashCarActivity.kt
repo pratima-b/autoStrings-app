@@ -16,6 +16,8 @@ import com.example.autoinsight.WashContactActivity.Companion.c
 import com.example.autoinsight.WashContactActivity.Companion.d
 import com.example.autoinsight.WashContactActivity.Companion.e
 import com.example.autoinsight.WashContactActivity.Companion.f
+import com.google.firebase.auth.FirebaseAuth
+
 class WashCarActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
@@ -29,6 +31,9 @@ class WashCarActivity : AppCompatActivity() {
         }
         firstPressTime = System.currentTimeMillis()
     }
+
+
+
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",
@@ -52,6 +57,11 @@ class WashCarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washcar)
+
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)
         button1.setOnClickListener(View.OnClickListener {
@@ -142,14 +152,17 @@ class WashCarActivity : AppCompatActivity() {
 
             }
 
-            val logout = this.findViewById<ImageView>(R.id.logout)
-            logout.setOnClickListener {
-                val intent = Intent(this, LoginActivity::class.java).apply {
-                }
-                startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
-            }
         }
+    }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
     }
 }

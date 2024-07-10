@@ -57,6 +57,11 @@ class DataContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datacontact)
 
+        val logout = findViewById<ImageView>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
+
         val ccp: CountryCodePicker = this.findViewById(R.id.countryCodeHolder)
         j = this.findViewById(R.id.mobile)
         k = this.findViewById(R.id.email)
@@ -89,15 +94,17 @@ class DataContactActivity : AppCompatActivity() {
         }
 
 
-        val logout = this.findViewById<ImageView>(R.id.logout)
-        logout.setOnClickListener {
-            firebaseAuth.signOut()
-            Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, LoginActivity::class.java).apply {
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        }
+
+    }
+
+    private fun logoutUser() {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish() // Close the current activity
     }
 
     private fun isValidEmail(email: String): Boolean {
