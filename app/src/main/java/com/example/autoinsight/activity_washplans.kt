@@ -18,6 +18,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 
+
+
 class activity_washplans : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")

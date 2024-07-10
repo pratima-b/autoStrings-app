@@ -188,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="Enter Selected Plan *"
+                    android:text="Enter Selected Plan ₹*"
                     android:textSize="18sp"
                     style="@style/Text"/>
             </LinearLayout>
@@ -203,7 +203,7 @@
                 android:background="@drawable/border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
-                android:hint="499₹"
+                android:hint="499"
                 android:inputType="number"
                 android:padding="8dp"
                 android:textColor="@color/black"
