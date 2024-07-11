@@ -181,7 +181,7 @@ class DataFeedbackActivity : AppCompatActivity() {
             currentUserDoc.set(userData)
                 .addOnSuccessListener {
                     // Data saved successfully
-                    Toast.makeText(this, "Data saved to Firestore", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data submitted", Toast.LENGTH_SHORT).show()
                     // Navigate to SelectActivity
                     val intent = Intent(this, SelectActivity::class.java)
                     startActivity(intent)

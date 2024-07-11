@@ -136,6 +136,8 @@ class activity_washplans : AppCompatActivity() {
                     .addOnSuccessListener {
 
                         val intent = Intent(this, SelectActivity::class.java)
+                        Toast.makeText(this, "Data submitted", Toast.LENGTH_SHORT).show()
+
                         intent.putExtra("planSelected", selectedPlan)
                         intent.putExtra("paymentStatus", paymentStatus)
                         startActivity(intent)
@@ -143,7 +145,7 @@ class activity_washplans : AppCompatActivity() {
 
                     }
                     .addOnFailureListener {
-                        showToast("Failed to save data to Firestore")
+                        showToast("Failed to save the data")
                     }
             } else {
                 // Show a dialog or your custom message when internet is not available
