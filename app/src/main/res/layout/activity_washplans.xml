@@ -145,6 +145,16 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/zoomButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_zoom_icon" />
+
         <LinearLayout
             android:layout_width="1000px"
             android:layout_height="654px"
