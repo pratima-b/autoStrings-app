@@ -76,8 +76,13 @@ class WashContactActivity : AppCompatActivity() {
                     "Please fill the mandatory * field.",
                     Toast.LENGTH_SHORT
                 ).show()
+            } else if (!isValidPhoneNumber(j.text.toString())) {
+                Toast.makeText(
+                    applicationContext,
+                    "Phone number must be exactly 10 digits",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (!isValidEmail(k.text.toString())) {
-                // Show an error message or handle the invalid email condition
                 Toast.makeText(
                     applicationContext,
                     "Invalid email address",
@@ -107,8 +112,13 @@ class WashContactActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         finish() // Close the current activity
     }
+    private fun isValidPhoneNumber(phone: String): Boolean {
+        return phone.length == 10
+    }
+
     private fun isValidEmail(email: String): Boolean {
-        return email.contains("@")
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
     }
 
 }

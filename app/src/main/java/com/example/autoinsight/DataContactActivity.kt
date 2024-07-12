@@ -11,11 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.hbb20.CountryCodePicker
 
-
 class DataContactActivity : AppCompatActivity() {
     val firebaseAuth = FirebaseAuth.getInstance()
 
-    companion object{
+    companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var a: EditText
         @SuppressLint("StaticFieldLeak")
@@ -53,6 +52,7 @@ class DataContactActivity : AppCompatActivity() {
         }
         firstPressTime = System.currentTimeMillis()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datacontact)
@@ -76,8 +76,13 @@ class DataContactActivity : AppCompatActivity() {
                     "Please fill the mandatory * field.",
                     Toast.LENGTH_SHORT
                 ).show()
+            } else if (!isValidPhoneNumber(j.text.toString())) {
+                Toast.makeText(
+                    applicationContext,
+                    "Phone number must be exactly 10 digits",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else if (!isValidEmail(k.text.toString())) {
-                // Show an error message or handle the invalid email condition
                 Toast.makeText(
                     applicationContext,
                     "Invalid email address",
@@ -92,9 +97,6 @@ class DataContactActivity : AppCompatActivity() {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
-
-
-
     }
 
     private fun logoutUser() {
@@ -107,8 +109,12 @@ class DataContactActivity : AppCompatActivity() {
         finish() // Close the current activity
     }
 
-    private fun isValidEmail(email: String): Boolean {
-        return email.contains("@")
+    private fun isValidPhoneNumber(phone: String): Boolean {
+        return phone.length == 10
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
+    }
 }
