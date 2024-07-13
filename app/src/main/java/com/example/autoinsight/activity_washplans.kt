@@ -5,7 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.app.Dialog
+import android.graphics.Rect
 import android.net.ConnectivityManager
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -17,8 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
-
-
 
 class activity_washplans : AppCompatActivity() {
 
@@ -33,6 +36,7 @@ class activity_washplans : AppCompatActivity() {
         }
         firstPressTime = System.currentTimeMillis()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
@@ -43,6 +47,7 @@ class activity_washplans : AppCompatActivity() {
         }
 
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
+        val zoomButton = findViewById<ImageButton>(R.id.zoomButton)
 
         // Fetch and display the image from Firebase Storage
         val storageReference = FirebaseStorage.getInstance().reference.child("plans.png")
@@ -51,31 +56,30 @@ class activity_washplans : AppCompatActivity() {
         }.addOnFailureListener {
             showToast("Failed to load image")
         }
+        zoomButton.setOnClickListener {
+            openZoomDialog()
+        }
 
-
-        val button1 = this.findViewById<ImageButton>(R.id.button1)
-        button1.setOnClickListener(View.OnClickListener {
+        val button1 = findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener {
             val intent = Intent(this, WashContactActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
 
-        })
-
-        val button2 = this.findViewById<ImageButton>(R.id.button2)
-        button2.setOnClickListener(View.OnClickListener {
+        val button2 = findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener {
             val intent = Intent(this, WashPersonalActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
 
-        })
-
-        val button3 = this.findViewById<ImageButton>(R.id.button3)
-        button3.setOnClickListener(View.OnClickListener {
+        val button3 = findViewById<ImageButton>(R.id.button3)
+        button3.setOnClickListener {
             val intent = Intent(this, WashCarActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
-        })
+        }
 
         val proceedButton = findViewById<Button>(R.id.proceedbtn)
         val selectedPlanEditText = findViewById<EditText>(R.id.lastNameuser)
@@ -91,8 +95,7 @@ class activity_washplans : AppCompatActivity() {
                 val selectedPlan = selectedPlanEditText.text.toString()
                 val paymentStatus = paymentStatusDropdown.text.toString()
 
-
-                // Extract the intented data received from the previous activity
+                // Extract the intended data received from the previous activity
                 val intent = intent
                 val firstName = intent.getStringExtra("firstName")
                 val lastName = intent.getStringExtra("lastName")
@@ -110,12 +113,10 @@ class activity_washplans : AppCompatActivity() {
 
                 // Store the data in Firestore
                 val db = FirebaseFirestore.getInstance()
-                val currentUserEmail = email // Change this to the user's email
                 val docRef = db.collection("carWashing").document(email.toString())
-                val userEmail = currentUserEmail
 
                 val data = hashMapOf(
-                    "collectedBy" to currentUserEmail,
+                    "collectedBy" to email,
                     "firstName" to firstName,
                     "lastName" to lastName,
                     "houseNo" to houseNo,
@@ -134,7 +135,6 @@ class activity_washplans : AppCompatActivity() {
 
                 docRef.set(data)
                     .addOnSuccessListener {
-
                         val intent = Intent(this, SelectActivity::class.java)
                         Toast.makeText(this, "Data submitted", Toast.LENGTH_SHORT).show()
 
@@ -142,34 +142,124 @@ class activity_washplans : AppCompatActivity() {
                         intent.putExtra("paymentStatus", paymentStatus)
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
                     }
                     .addOnFailureListener {
                         showToast("Failed to save the data")
                     }
             } else {
-                // Show a dialog or your custom message when internet is not available
                 showNoInternetDialog()
             }
         }
-
-
-
     }
 
+
+    private fun openZoomDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_zoom_image)
+
+        val zoomedImageView = dialog.findViewById<ImageView>(R.id.zoomedImageView)
+        val storageReference = FirebaseStorage.getInstance().reference.child("plans.png")
+
+        // Load the zoomed image into zoomedImageView
+        storageReference.downloadUrl.addOnSuccessListener { uri ->
+            Glide.with(this)
+                .load(uri)
+                .override(1080, 800)  // Adjust size as needed
+                .into(zoomedImageView)
+        }.addOnFailureListener {
+            showToast("Failed to load zoomed image")
+        }
+
+        var scaleFactor = 1.0f
+        var lastFocusX = 0f
+        var lastFocusY = 0f
+        var focusX = 0f
+        var focusY = 0f
+
+        val scaleDetector = ScaleGestureDetector(this, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                scaleFactor *= detector.scaleFactor
+                scaleFactor = Math.max(1.0f, Math.min(scaleFactor, 10.0f))  // Adjust boundaries as necessary
+                zoomedImageView.scaleX = scaleFactor
+                zoomedImageView.scaleY = scaleFactor
+                adjustTranslation(zoomedImageView, focusX, focusY)
+                return true
+            }
+        })
+
+        val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onScroll(
+                e1: MotionEvent,
+                e2: MotionEvent,
+                distanceX: Float,
+                distanceY: Float
+            ): Boolean {
+                focusX -= distanceX
+                focusY -= distanceY
+                adjustTranslation(zoomedImageView, focusX, focusY)
+                return true
+            }
+
+            override fun onDown(e: MotionEvent): Boolean {
+                return true
+            }
+        })
+
+        zoomedImageView.setOnTouchListener { _, event ->
+            scaleDetector.onTouchEvent(event)
+            gestureDetector.onTouchEvent(event)
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    lastFocusX = event.x - focusX
+                    lastFocusY = event.y - focusY
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    if (!scaleDetector.isInProgress) {
+                        focusX = event.x - lastFocusX
+                        focusY = event.y - lastFocusY
+                        adjustTranslation(zoomedImageView, focusX, focusY)
+                    }
+                }
+            }
+
+            true
+        }
+
+        dialog.show()
+    }
+
+    private fun adjustTranslation(view: ImageView, focusX: Float, focusY: Float) {
+        val parent = view.parent as View
+        val parentWidth = parent.width
+        val parentHeight = parent.height
+
+        val viewWidth = view.width * view.scaleX
+        val viewHeight = view.height * view.scaleY
+
+        val maxTranslateX = (viewWidth - parentWidth) / 2
+        val maxTranslateY = (viewHeight - parentHeight) / 2
+
+        val constrainedX = focusX.coerceIn(-maxTranslateX, maxTranslateX)
+        val constrainedY = focusY.coerceIn(-maxTranslateY, maxTranslateY)
+
+        view.translationX = constrainedX
+        view.translationY = constrainedY
+    }
+
+
+
     private fun logoutUser() {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.signOut()
+        FirebaseAuth.getInstance().signOut()
         Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-        finish() // Close the current activity
+        finish()
     }
 
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
