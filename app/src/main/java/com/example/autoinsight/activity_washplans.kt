@@ -17,6 +17,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -24,6 +25,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 
 class activity_washplans : AppCompatActivity() {
+
+    private lateinit var progressBar: ProgressBar
 
     @Deprecated("Deprecated in Java")
     var firstPressTime: Long = 0
@@ -40,6 +43,8 @@ class activity_washplans : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
+
+        progressBar = findViewById(R.id.progressBar)
 
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {
@@ -58,12 +63,19 @@ class activity_washplans : AppCompatActivity() {
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
         val zoomButton = findViewById<ImageButton>(R.id.zoomButton)
 
+        progressBar.visibility = View.VISIBLE
+
         // Fetch and display the image from Firebase Storage
         val storageReference = FirebaseStorage.getInstance().reference.child("plans.png")
         storageReference.downloadUrl.addOnSuccessListener { uri ->
             Glide.with(this).load(uri).into(fetchedImageView)
+
+            progressBar.visibility = View.GONE
+
         }.addOnFailureListener {
             showToast("Failed to load image")
+
+            progressBar.visibility = View.GONE
         }
         zoomButton.setOnClickListener {
             openZoomDialog()
