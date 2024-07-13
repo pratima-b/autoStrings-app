@@ -47,7 +47,6 @@ class activity_washplans : AppCompatActivity() {
         setContentView(R.layout.activity_washplans)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-
         progressBar = findViewById(R.id.progressBar)
 
         val logout = findViewById<ImageView>(R.id.logout)
@@ -61,7 +60,6 @@ class activity_washplans : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         }
 
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
@@ -71,7 +69,6 @@ class activity_washplans : AppCompatActivity() {
 
         val storageReference = FirebaseStorage.getInstance().reference.child("plans.png")
         storageReference.downloadUrl.addOnSuccessListener { uri ->
-            // Load the image using Glide and set the progress bar visibility to GONE once done
             Glide.with(this)
                 .load(uri)
                 .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
@@ -81,7 +78,6 @@ class activity_washplans : AppCompatActivity() {
                         target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        // Hide the progress bar if image loading failed
                         progressBar.visibility = ProgressBar.GONE
                         showToast("Failed to load current image")
                         return false
@@ -94,14 +90,12 @@ class activity_washplans : AppCompatActivity() {
                         dataSource: com.bumptech.glide.load.DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        // Hide the progress bar when the image is loaded successfully
                         progressBar.visibility = ProgressBar.GONE
                         return false
                     }
                 })
                 .into(fetchedImageView)
         }.addOnFailureListener {
-            // Hide the progress bar if fetching the URL failed
             progressBar.visibility = ProgressBar.GONE
             showToast("Failed to load current image")
         }
@@ -135,26 +129,17 @@ class activity_washplans : AppCompatActivity() {
         val selectedPlanEditText = findViewById<EditText>(R.id.lastNameuser)
         val paymentStatusDropdown = findViewById<AutoCompleteTextView>(R.id.ans2)
 
-        // Setup the dropdown menu
         val paymentStatusOptions = arrayOf("Yes", "No")
         val adapter = ArrayAdapter(this, R.layout.dropdown, paymentStatusOptions)
         paymentStatusDropdown.setAdapter(adapter)
 
-
-        val selectedPlan = selectedPlanEditText.text.toString()
-        val paymentStatus = paymentStatusDropdown.text.toString()
-
         proceedButton.setOnClickListener {
-            if (selectedPlan.isEmpty() || paymentStatus.isEmpty()) {
+            val selectedPlan = selectedPlanEditText.text.toString()
+            val paymentStatus = paymentStatusDropdown.text.toString()
 
+            if (selectedPlan.isEmpty() || paymentStatus.isEmpty() || paymentStatus !in paymentStatusOptions) {
                 showToast("Please fill all the mandatory * fields.")
-            }
-
-            else if (isNetworkAvailable()) {
-                val selectedPlan = selectedPlanEditText.text.toString()
-                val paymentStatus = paymentStatusDropdown.text.toString()
-
-                // Extract the intended data received from the previous activity
+            } else if (isNetworkAvailable()) {
                 val intent = intent
                 val firstName = intent.getStringExtra("firstName")
                 val lastName = intent.getStringExtra("lastName")
@@ -171,7 +156,6 @@ class activity_washplans : AppCompatActivity() {
                 val manufacturingYear = intent.getStringExtra("manufacturingYear")
                 val registrationNumber = intent.getStringExtra("registrationNumber")
 
-                // Store the data in Firestore
                 val db = FirebaseFirestore.getInstance()
                 val docRef = db.collection("carWashing").document(email.toString())
 
@@ -214,6 +198,7 @@ class activity_washplans : AppCompatActivity() {
             }
         }
     }
+
 
 
     private fun openZoomDialog() {
