@@ -312,7 +312,7 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:background="@drawable/custom_btn"
-            android:text="@string/verify"
+            android:text="@string/next"
             android:layout_marginTop="15dp"
             android:textAllCaps="true"
             android:layout_marginStart="20dp"
