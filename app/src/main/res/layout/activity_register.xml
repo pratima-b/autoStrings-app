@@ -129,9 +129,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="Password *"
+                    android:text="Password"
                     android:textSize="18sp"
                     style="@style/Text"/>
+
+                <ImageView
+                    android:id="@+id/showHide"
+                    android:layout_width="24dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="145dp"
+                    android:src="@drawable/custom_password_toggle"
+                    android:onClick="ShowHidePass"
+                    android:contentDescription="@string/s" />
+
 
             </LinearLayout>
 
@@ -144,14 +154,14 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:hint="********"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:autofillHints=""
-                tools:ignore="VisualLintTextFieldSize"
                 style="@style/EditTextStyle"/>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout17"
             android:layout_width="match_parent"

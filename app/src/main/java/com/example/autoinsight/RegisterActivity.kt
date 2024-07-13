@@ -2,9 +2,11 @@ package com.example.autoinsight
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,10 +31,22 @@ class RegisterActivity : AppCompatActivity() {
         }
         firstPressTime = System.currentTimeMillis()
     }
+
+    private lateinit var regpasswordEditText: EditText
+    private lateinit var showHide: ImageView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        showHide = findViewById<ImageView>(R.id.showHide) //
+        regpasswordEditText = this.findViewById(R.id.regpassWord)
+
+        showHide.setOnClickListener{
+            togglePasswordVisibility()
+        }
 
 
         auth = FirebaseAuth.getInstance()
@@ -131,5 +145,15 @@ class RegisterActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "RegisterActivity"
+    }
+
+    private fun togglePasswordVisibility() {
+        if (regpasswordEditText.inputType == (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)) {
+            regpasswordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            showHide.setImageResource(R.drawable.ic_show_eye)
+        } else {
+            regpasswordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            showHide.setImageResource(R.drawable.ic_hide_eye)
+        }
     }
 }
