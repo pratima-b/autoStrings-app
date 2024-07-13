@@ -8,6 +8,7 @@ import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 
 class WashOtpActivity : AppCompatActivity() {
     private lateinit var resendTextView: TextView
@@ -29,6 +30,8 @@ class WashOtpActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washotp)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
 
         val mobile = intent.getStringExtra("mobile")

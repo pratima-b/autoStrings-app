@@ -14,6 +14,7 @@ import com.example.autoinsight.WashContactActivity.Companion.d
 import com.example.autoinsight.WashContactActivity.Companion.e
 import com.example.autoinsight.WashContactActivity.Companion.f
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 
 class WashPersonalActivity : AppCompatActivity() {
@@ -32,6 +33,8 @@ class WashPersonalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washpersonal)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
 
         val logout = findViewById<ImageView>(R.id.logout)

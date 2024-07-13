@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.autoinsight.DataContactActivity.Companion.a
 import com.example.autoinsight.DataContactActivity.Companion.b
 import com.example.autoinsight.DataContactActivity.Companion.c
@@ -37,6 +38,8 @@ class DataPersonalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datapersonal)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {

@@ -19,9 +19,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
 import com.google.firebase.auth.FirebaseAuth
 
 class activity_washplans : AppCompatActivity() {
@@ -43,6 +45,8 @@ class activity_washplans : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washplans)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
         progressBar = findViewById(R.id.progressBar)
 
@@ -63,20 +67,45 @@ class activity_washplans : AppCompatActivity() {
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
         val zoomButton = findViewById<ImageButton>(R.id.zoomButton)
 
-        progressBar.visibility = View.VISIBLE
+        progressBar.visibility = ProgressBar.VISIBLE
 
-        // Fetch and display the image from Firebase Storage
         val storageReference = FirebaseStorage.getInstance().reference.child("plans.png")
         storageReference.downloadUrl.addOnSuccessListener { uri ->
-            Glide.with(this).load(uri).into(fetchedImageView)
+            // Load the image using Glide and set the progress bar visibility to GONE once done
+            Glide.with(this)
+                .load(uri)
+                .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        // Hide the progress bar if image loading failed
+                        progressBar.visibility = ProgressBar.GONE
+                        showToast("Failed to load current image")
+                        return false
+                    }
 
-            progressBar.visibility = View.GONE
-
+                    override fun onResourceReady(
+                        resource: android.graphics.drawable.Drawable?,
+                        model: Any?,
+                        target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                        dataSource: com.bumptech.glide.load.DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        // Hide the progress bar when the image is loaded successfully
+                        progressBar.visibility = ProgressBar.GONE
+                        return false
+                    }
+                })
+                .into(fetchedImageView)
         }.addOnFailureListener {
-            showToast("Failed to load image")
-
-            progressBar.visibility = View.GONE
+            // Hide the progress bar if fetching the URL failed
+            progressBar.visibility = ProgressBar.GONE
+            showToast("Failed to load current image")
         }
+
         zoomButton.setOnClickListener {
             openZoomDialog()
         }
@@ -108,7 +137,7 @@ class activity_washplans : AppCompatActivity() {
 
         // Setup the dropdown menu
         val paymentStatusOptions = arrayOf("Yes", "No")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, paymentStatusOptions)
+        val adapter = ArrayAdapter(this, R.layout.dropdown, paymentStatusOptions)
         paymentStatusDropdown.setAdapter(adapter)
 
         proceedButton.setOnClickListener {

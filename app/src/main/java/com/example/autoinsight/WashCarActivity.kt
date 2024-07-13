@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.autoinsight.WashContactActivity.Companion.a
 import com.example.autoinsight.WashContactActivity.Companion.b
 import com.example.autoinsight.WashContactActivity.Companion.c
@@ -57,6 +58,8 @@ class WashCarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washcar)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
 
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {
@@ -107,7 +110,7 @@ class WashCarActivity : AppCompatActivity() {
         val modelAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.car_model)
 
         // Populate the brand AutoCompleteTextView
-        val brandAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, brands)
+        val brandAdapter = ArrayAdapter(this, R.layout.dropdown, brands)
         brandAutoCompleteTextView.setAdapter(brandAdapter)
 
         // Set an item click listener for the brand AutoCompleteTextView
@@ -117,7 +120,7 @@ class WashCarActivity : AppCompatActivity() {
 
             // Populate the model AutoCompleteTextView with models for the selected brand
             val modelAdapter =
-                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, modelsForBrand)
+                ArrayAdapter(this, R.layout.dropdown, modelsForBrand)
             modelAutoCompleteTextView.setAdapter(modelAdapter)
 
 
