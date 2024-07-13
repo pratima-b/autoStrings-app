@@ -202,7 +202,7 @@ class activity_washplans : AppCompatActivity() {
 
                         intent.putExtra("planSelected", selectedPlan)
                         intent.putExtra("paymentStatus", paymentStatus)
-                        0
+
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     }

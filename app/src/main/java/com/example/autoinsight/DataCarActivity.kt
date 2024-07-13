@@ -139,17 +139,18 @@ class DataCarActivity : AppCompatActivity() {
             val segment = findViewById<AutoCompleteTextView>(R.id.segment)
             segment.setAdapter(arrayAdapterSegment)
 
+            val manufacturer = brandAutoCompleteTextView.text.toString()
+            val carModel = modelAutoCompleteTextView.text.toString()
+            val manufacturingYear = manfYear.text.toString()
+            val registrationNumber = regNo.text.toString()
+            val fuelTypeSent = fuel.text.toString()
+            val carSegmentSent = segment.text.toString()
 
             val cnextButton = findViewById<Button>(R.id.cnextButton)
             cnextButton.setOnClickListener {
-                val manufacturer = brandAutoCompleteTextView.text.toString()
-                val carModel = modelAutoCompleteTextView.text.toString()
-                val manufacturingYear = manfYear.text.toString()
-                val registrationNumber = regNo.text.toString()
-                val fuelType = fuel.text.toString()
-                val carSegment = segment.text.toString()
 
-                if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegment.isEmpty() ||fuelType.isEmpty() || manufacturingYear.isEmpty()    ) {
+
+                if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegmentSent.isEmpty() ||fuelTypeSent.isEmpty() || manufacturingYear.isEmpty()    ) {
                     Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
                 } else {
                     // Create an intent to start the next activity and pass data as extras
@@ -166,8 +167,8 @@ class DataCarActivity : AppCompatActivity() {
                         putExtra("carModel", carModel)
                         putExtra("manufacturingYear", manufacturingYear)
                         putExtra("registrationNumber", registrationNumber)
-                        putExtra("fuelType", fuelType)
-                        putExtra("carSegment", carSegment)
+                        putExtra("fuelType", fuelTypeSent)
+                        putExtra("carSegment", carSegmentSent)
                     }
                     startActivity(intent)
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
