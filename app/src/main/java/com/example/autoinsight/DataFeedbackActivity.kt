@@ -89,18 +89,19 @@ class DataFeedbackActivity : AppCompatActivity() {
         val arrayAdapterAns: ArrayAdapter<String> = ArrayAdapter(this, R.layout.dropdown, services)
         val ans = findViewById<AutoCompleteTextView>(R.id.ans)
         ans.setAdapter(arrayAdapterAns)
-        val fnameyes = findViewById<EditText>(R.id.fnameyes)
-        val lnameyes = findViewById<EditText>(R.id.lnameyes)
-        val contactNumber1 = findViewById<EditText>(R.id.contactNum1)
-        val contactNumber2 = findViewById<EditText>(R.id.contactNum2)
 
-        fnameyes.visibility = View.GONE
-        lnameyes.visibility = View.GONE
-        contactNumber1.visibility = View.GONE
-        contactNumber2.visibility = View.GONE
+        val ref1 = this.findViewById<EditText>(R.id.fnameyes)
+        val ref2 = this.findViewById<EditText>(R.id.lnameyes)
+        val contact1 = this.findViewById<EditText>(R.id.contactNum1)
+        val contact2 = this.findViewById<EditText>(R.id.contactNum2)
+        val edit1 = this.findViewById<EditText>(R.id.edit1)
+        val edit2 = this.findViewById<EditText>(R.id.edit2)
 
-        val edit1 = findViewById<EditText>(R.id.edit1)
-        val edit2 = findViewById<EditText>(R.id.edit2)
+
+        ref1.visibility = View.GONE
+        ref2.visibility = View.GONE
+        contact1.visibility = View.GONE
+        contact2.visibility = View.GONE
 
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -126,9 +127,14 @@ class DataFeedbackActivity : AppCompatActivity() {
         val carModel = intent.getStringExtra("carModel")
         val fuelType = intent.getStringExtra("fuelType")
         val carSegment = intent.getStringExtra("carSegment")
+        val manufacturingYear = intent.getStringExtra("manufacturingYear")
+        val registrationNumber = intent.getStringExtra("registrationNumber")
         val serviceDone = intent.getStringExtra("serviceDone")
         val often = intent.getStringExtra("often")
         val avgRunning = intent.getStringExtra("avgRunning")
+        val totalRunning = intent.getStringExtra("totalRunning")
+        val where = intent.getStringExtra("where")
+        val whenScheduled = intent.getStringExtra("whenScheduled")
 
         val fnext = this.findViewById<Button>(R.id.submit)
 
@@ -137,21 +143,35 @@ class DataFeedbackActivity : AppCompatActivity() {
         ans.setOnItemClickListener { parent, view, position, id ->
             selectedText = parent.getItemAtPosition(position).toString()
             if (selectedText == "Yes") {
-                fnameyes.visibility = View.VISIBLE
-                lnameyes.visibility = View.VISIBLE
-                contactNumber1.visibility = View.VISIBLE
-                contactNumber2.visibility = View.VISIBLE
+                ref1.visibility = View.VISIBLE
+                ref2.visibility = View.VISIBLE
+                contact1.visibility = View.VISIBLE
+                contact2.visibility = View.VISIBLE
 
             } else {
                 selectedText = "No"
-                fnameyes.visibility = View.GONE
-                lnameyes.visibility = View.GONE
-                contactNumber1.visibility = View.GONE
-                contactNumber2.visibility = View.GONE
+                ref1.visibility = View.GONE
+                ref2.visibility = View.GONE
+                contact1.visibility = View.GONE
+                contact2.visibility = View.GONE
             }
         }
 
         fnext.setOnClickListener {
+            // Validate all fields before submitting
+            if (selectedText.isEmpty() || edit1.text.toString().isEmpty() || edit2.text.toString().isEmpty() ||
+                (selectedText == "Yes" && (ref1.text.toString().isEmpty() || ref2.text.toString().isEmpty() || contact1.text.toString().isEmpty() || contact2.text.toString().isEmpty()))
+            ) {
+                Toast.makeText(this, "Fill all the mandatory fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Validate contact numbers
+            if (selectedText == "Yes" && (contact1.text.toString().length != 10 || contact2.text.toString().length != 10)) {
+                Toast.makeText(this, "Phone number must be of 10 digits only", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Firestore instance
             val db = FirebaseFirestore.getInstance()
 
@@ -174,16 +194,21 @@ class DataFeedbackActivity : AppCompatActivity() {
                 "carModel" to carModel,
                 "fuelType" to fuelType,
                 "carSegment" to carSegment,
+                "registrationNumber" to registrationNumber,
+                "manufacturingYear" to manufacturingYear,
                 "serviceDone" to serviceDone,
                 "often" to often,
                 "avgRunning" to avgRunning,
+                "totalRunning" to totalRunning,
+                "where" to where,
+                "whenScheduled" to whenScheduled,
                 "answer" to selectedText, // Store selectedText
-                "fNameYes" to if (selectedText == "Yes") fnameyes.text.toString() else "",
-                "lNameYes" to if (selectedText == "Yes") lnameyes.text.toString() else "",
-                "contactNumber1" to if (selectedText == "Yes") contactNumber1.text.toString() else "",
-                "contactNumber2" to if (selectedText == "Yes") contactNumber2.text.toString() else "",
+                "ref1" to if (selectedText == "Yes") ref1.text.toString() else "",
+                "ref2" to if (selectedText == "Yes") ref2.text.toString() else "",
+                "contactNumber1" to if (selectedText == "Yes") contact1.text.toString() else "",
+                "contactNumber2" to if (selectedText == "Yes") contact2.text.toString() else "",
                 "Reasons behind selecting service center" to edit1.text.toString(),
-                "edit2" to edit2.text.toString()
+                "Will you choose Autostrings if we provide you better quality service at an affordable price?" to edit2.text.toString()
             )
 
             Log.d("Debug", "userData: $userData")

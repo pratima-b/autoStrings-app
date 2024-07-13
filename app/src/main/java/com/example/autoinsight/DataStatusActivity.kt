@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -99,6 +100,10 @@ class DataStatusActivity : AppCompatActivity() {
         val carModel = intent.getStringExtra("carModel")
         val fuelType = intent.getStringExtra("fuelType")
         val carSegment = intent.getStringExtra("carSegment")
+        val manufacturingYear = intent.getStringExtra("manufacturingYear")
+        val registrationNumber = intent.getStringExtra("registrationNumber")
+
+
 
         var selectedText: String? = null
 
@@ -142,13 +147,20 @@ class DataStatusActivity : AppCompatActivity() {
             }
         }
 
+        val totalRunning = findViewById<EditText>(R.id.totalrunning)
+
         fun isValidSelection(autoCompleteTextView: AutoCompleteTextView): Boolean {
             val selectedValue = autoCompleteTextView.text.toString()
             return selectedValue != "Select your answer"
         }
+
+        fun isValidField(editText: EditText): Boolean {
+            return editText.text.toString().isNotEmpty()
+        }
+
         val snext = this.findViewById<Button>(R.id.nextbtn)
         snext.setOnClickListener {
-            if (isValidSelection(serviceDone)) {
+            if (isValidField(totalRunning) && isValidSelection(serviceDone)) {
                 if (selectedText == "Yes") {
                     if (isValidSelection(often) && isValidSelection(avgRunning) && isValidSelection(where)) {
                         val intent = Intent(this, DataFeedbackActivity::class.java).apply {
@@ -164,10 +176,13 @@ class DataStatusActivity : AppCompatActivity() {
                             putExtra("carModel", carModel)
                             putExtra("fuelType", fuelType)
                             putExtra("carSegment", carSegment)
+                            putExtra("registrationNumber", registrationNumber)
+                            putExtra("manufacturingYear", manufacturingYear)
                             putExtra("serviceDone", selectedText)
                             putExtra("where", where.text.toString())
                             putExtra("often", often.text.toString())
                             putExtra("avgRunning", avgRunning.text.toString())
+                            putExtra("totalRunning", totalRunning.text.toString())
                         }
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -189,14 +204,16 @@ class DataStatusActivity : AppCompatActivity() {
                             putExtra("carModel", carModel)
                             putExtra("fuelType", fuelType)
                             putExtra("carSegment", carSegment)
+                            putExtra("registrationNumber", registrationNumber)
+                            putExtra("manufacturingYear", manufacturingYear)
                             putExtra("serviceDone", selectedText)
                             putExtra("often", often.text.toString())
                             putExtra("avgRunning", avgRunning.text.toString())
                             putExtra("whenScheduled", whenScheduled.text.toString())
+                            putExtra("totalRunning", totalRunning.text.toString())
                         }
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-
                     } else {
                         Toast.makeText(this, "Please fill all the mandatory * fields", Toast.LENGTH_SHORT).show()
                     }

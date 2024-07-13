@@ -52,8 +52,11 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-            loginUser(email, password)
-
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter both Employee Id and password", Toast.LENGTH_SHORT).show()
+            } else {
+                loginUser(email, password)
+            }
         }
 
         val register = findViewById<TextView>(R.id.register)
