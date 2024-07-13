@@ -43,10 +43,9 @@ class RegisterActivity : AppCompatActivity() {
         val lastNameEditText = findViewById<EditText>(R.id.lastNameuser)
         val mobileNumberEditText = findViewById<EditText>(R.id.lastName)
         val registerButton = findViewById<Button>(R.id.registerBtn)
-        val generateButton=findViewById<Button>(R.id.generateButton)
-        val empidUI=findViewById<TextView>(R.id.empid)
-        var empId: String? =null;
-
+        val generateButton = findViewById<Button>(R.id.generateButton)
+        val empidUI = findViewById<TextView>(R.id.empid)
+        var empId: String? = null
 
         generateButton.setOnClickListener {
             val firstName = firstNameEditText.text.toString()
@@ -61,14 +60,19 @@ class RegisterActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             // Get user input
-            val username = empId?.toLowerCase(Locale.ROOT)
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
             val firstName = firstNameEditText.text.toString()
             val lastName = lastNameEditText.text.toString()
             val mobileNumber = mobileNumberEditText.text.toString()
 
+            // Validate input fields
+            if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || mobileNumber.isEmpty() || empId == null) {
+                Toast.makeText(this, "Please fill all the mandatory * fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
+            val username = empId!!.toLowerCase(Locale.ROOT)
 
             // Register the user with email and password
             auth.createUserWithEmailAndPassword("$username@autostrings.com", password)
@@ -93,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
                                 .set(userData)
                                 .addOnSuccessListener {
                                     Log.d(TAG, "User data added to Firestore")
-                                    Toast.makeText(this, "Registration sucessfull", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
                                     val intent = Intent(this, LoginActivity::class.java).apply {
                                     }
                                     startActivity(intent)

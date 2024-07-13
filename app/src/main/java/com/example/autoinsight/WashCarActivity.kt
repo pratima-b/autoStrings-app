@@ -34,8 +34,6 @@ class WashCarActivity : AppCompatActivity() {
         firstPressTime = System.currentTimeMillis()
     }
 
-
-
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",
@@ -52,15 +50,13 @@ class WashCarActivity : AppCompatActivity() {
         "Honda" to arrayOf( "Amaze", "City", "Civic", "CR-V", "Accord", "Jazz"),
         "GM/Chevrolet" to arrayOf("Beat", "Tavera", "Captiva", "Cruze"),
         "BMW" to arrayOf("X1","X3","X5","X7"),
-        "Mercedes" to arrayOf("C-Class", "GLA", "S-Class", "E-Class", "A-Class", "GLE", "GLC", "GLS", "G-Class"),
-
-        )
+        "Mercedes" to arrayOf("C-Class", "GLA", "S-Class", "E-Class", "A-Class", "GLE", "GLC", "GLS", "G-Class")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_washcar)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
 
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {
@@ -73,28 +69,20 @@ class WashCarActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         }
 
-        val button1 = this.findViewById<ImageButton>(R.id.button1)
-        button1.setOnClickListener(View.OnClickListener {
+        val button1 = findViewById<ImageButton>(R.id.button1)
+        button1.setOnClickListener {
             val intent = Intent(this, WashContactActivity::class.java)
             startActivity(intent)
-        })
+        }
 
-        val button2 = this.findViewById<ImageButton>(R.id.button2)
-        button2.setOnClickListener(View.OnClickListener {
+        val button2 = findViewById<ImageButton>(R.id.button2)
+        button2.setOnClickListener {
             val intent = Intent(this, WashPersonalActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
-        })
-
-        /*g = this.findViewById(R.id.manf)
-        h = this.findViewById(R.id.model)
-        i = this.findViewById(R.id.manfYear)
-        l = this.findViewById(R.id.regNo)
-        m = this.findViewById(R.id.fuel)*/
+        }
 
         val firstName = intent.getStringExtra("firstName")
         val lastName = intent.getStringExtra("lastName")
@@ -105,12 +93,13 @@ class WashCarActivity : AppCompatActivity() {
         val mobile = intent.getStringExtra("mobile")
         val email = intent.getStringExtra("email")
 
-
         val brandAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.manufacturer)
         val modelAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.car_model)
         val manfYear = findViewById<EditText>(R.id.manfYear)
         val regNo = findViewById<EditText>(R.id.regNo)
-
+        val fuel = findViewById<AutoCompleteTextView>(R.id.fuel)
+        val segment = findViewById<AutoCompleteTextView>(R.id.segment)
+        val cnextButton = findViewById<Button>(R.id.cnextButton)
 
         // Populate the brand AutoCompleteTextView
         val brandAdapter = ArrayAdapter(this, R.layout.dropdown, brands)
@@ -122,62 +111,49 @@ class WashCarActivity : AppCompatActivity() {
             val modelsForBrand = modelsMap[selectedBrand] ?: emptyArray()
 
             // Populate the model AutoCompleteTextView with models for the selected brand
-            val modelAdapter =
-                ArrayAdapter(this, R.layout.dropdown, modelsForBrand)
+            val modelAdapter = ArrayAdapter(this, R.layout.dropdown, modelsForBrand)
             modelAutoCompleteTextView.setAdapter(modelAdapter)
+        }
 
+        val fuelType = resources.getStringArray(R.array.fuelType)
+        val arrayAdapterFuel = ArrayAdapter(this, R.layout.dropdown, fuelType)
+        fuel.setAdapter(arrayAdapterFuel)
 
-            val fuelType = resources.getStringArray(R.array.fuelType)
-            val arrayAdapterFuel: ArrayAdapter<String> =
-                ArrayAdapter(this, R.layout.dropdown, fuelType)
-            val fuel = findViewById<AutoCompleteTextView>(R.id.fuel)
-            fuel.setAdapter(arrayAdapterFuel)
+        val carSegment = resources.getStringArray(R.array.carSegment)
+        val arrayAdapterSegment = ArrayAdapter(this, R.layout.dropdown, carSegment)
+        segment.setAdapter(arrayAdapterSegment)
 
-            val carSegment = resources.getStringArray(R.array.carSegment)
-            val arrayAdapterSegment: ArrayAdapter<String> =
-                ArrayAdapter(this, R.layout.dropdown, carSegment)
-            val segment = findViewById<AutoCompleteTextView>(R.id.segment)
-            segment.setAdapter(arrayAdapterSegment)
+        cnextButton.setOnClickListener {
+            val manufacturer = brandAutoCompleteTextView.text.toString()
+            val carModel = modelAutoCompleteTextView.text.toString()
+            val manufacturingYear = manfYear.text.toString()
+            val registrationNumber = regNo.text.toString()
+            val fuelTypeSent = fuel.text.toString()
+            val carSegmentSent = segment.text.toString()
 
-
-            val cnextButton = this.findViewById<Button>(R.id.cnextButton)
-            cnextButton.setOnClickListener {
-
-                val manufacturer = brandAutoCompleteTextView.text.toString()
-                val carModel = modelAutoCompleteTextView.text.toString()
-                val manufacturingYear = manfYear.text.toString()
-                val registrationNumber = regNo.text.toString()
-                val fuelType = fuel.text.toString()
-                val carSegment = segment.text.toString()
-
-
-                if (manufacturer.isEmpty() || carModel.isEmpty() || manufacturingYear.isEmpty() || registrationNumber.isEmpty() || fuelType.isEmpty() || carSegment.isEmpty()) {
-                    Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Create an intent to start the next activity and pass data as extras
-                    val intent = Intent(this, activity_washplans::class.java).apply {
-                        putExtra("firstName", firstName)
-                        putExtra("lastName", lastName)
-                        putExtra("houseNo", houseNo)
-                        putExtra("city", city)
-                        putExtra("state", state)
-                        putExtra("pinCode", pinCode)
-                        putExtra("mobile", mobile)
-                        putExtra("email", email)
-                        putExtra("manufacturer", manufacturer)
-                        putExtra("carModel", carModel)
-                        putExtra("manufacturingYear", manufacturingYear)
-                        putExtra("registrationNumber", registrationNumber)
-                        putExtra("fuelType", fuelType)
-                        putExtra("carSegment", carSegment)
-                    }
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            if (manufacturer.isEmpty() || carModel.isEmpty() || manufacturingYear.isEmpty() || registrationNumber.isEmpty() || fuelTypeSent.isEmpty() || carSegmentSent.isEmpty()) {
+                Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
+            } else {
+                // Create an intent to start the next activity and pass data as extras
+                val intent = Intent(this, activity_washplans::class.java).apply {
+                    putExtra("firstName", firstName)
+                    putExtra("lastName", lastName)
+                    putExtra("houseNo", houseNo)
+                    putExtra("city", city)
+                    putExtra("state", state)
+                    putExtra("pinCode", pinCode)
+                    putExtra("mobile", mobile)
+                    putExtra("email", email)
+                    putExtra("manufacturer", manufacturer)
+                    putExtra("carModel", carModel)
+                    putExtra("manufacturingYear", manufacturingYear)
+                    putExtra("registrationNumber", registrationNumber)
+                    putExtra("fuelType", fuelTypeSent)
+                    putExtra("carSegment", carSegmentSent)
                 }
-
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
-
-
         }
     }
 

@@ -19,7 +19,6 @@ import com.example.autoinsight.DataContactActivity.Companion.l
 import com.example.autoinsight.DataContactActivity.Companion.m
 import com.google.firebase.auth.FirebaseAuth
 
-
 class DataCarActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
@@ -33,6 +32,7 @@ class DataCarActivity : AppCompatActivity() {
         }
         firstPressTime = System.currentTimeMillis()
     }
+
     private val brands = arrayOf(
         "Tata", "Maruti", "Mahindra & Mahindra", "Hyundai",
         "Toyota", "Volkswagen", "Honda", "GM/Chevrolet",
@@ -50,14 +50,12 @@ class DataCarActivity : AppCompatActivity() {
         "GM/Chevrolet" to arrayOf("Beat", "Tavera", "Captiva", "Cruze"),
         "BMW" to arrayOf("X1","X3","X5","X7"),
         "Mercedes" to arrayOf("C-Class", "GLA", "S-Class", "E-Class", "A-Class", "GLE", "GLC", "GLS", "G-Class"),
-
-        )
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datacar)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
 
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {
@@ -70,7 +68,6 @@ class DataCarActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)
@@ -78,7 +75,6 @@ class DataCarActivity : AppCompatActivity() {
             val intent = Intent(this, DataContactActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         })
 
         val button2 = this.findViewById<ImageButton>(R.id.button2)
@@ -86,7 +82,6 @@ class DataCarActivity : AppCompatActivity() {
             val intent = Intent(this, DataPersonalActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
         })
 
         /*g = this.findViewById(R.id.manf)
@@ -104,13 +99,13 @@ class DataCarActivity : AppCompatActivity() {
         val mobile = intent.getStringExtra("mobile")
         val email = intent.getStringExtra("email")
 
-
-
         val brandAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.manufacturer)
         val modelAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.car_model)
         val manfYear = findViewById<EditText>(R.id.manfYear)
         val regNo = findViewById<EditText>(R.id.regNo)
-
+        val fuel = findViewById<AutoCompleteTextView>(R.id.fuel)
+        val segment = findViewById<AutoCompleteTextView>(R.id.segment)
+        val cnextButton = findViewById<Button>(R.id.cnextButton)
 
         // Populate the brand AutoCompleteTextView
         val brandAdapter = ArrayAdapter(this, R.layout.dropdown, brands)
@@ -122,23 +117,21 @@ class DataCarActivity : AppCompatActivity() {
             val modelsForBrand = modelsMap[selectedBrand] ?: emptyArray()
 
             // Populate the model AutoCompleteTextView with models for the selected brand
-            val modelAdapter =
-                ArrayAdapter(this, R.layout.dropdown, modelsForBrand)
+            val modelAdapter = ArrayAdapter(this, R.layout.dropdown, modelsForBrand)
             modelAutoCompleteTextView.setAdapter(modelAdapter)
+        }
 
+        val fuelType = resources.getStringArray(R.array.fuelType)
+        val arrayAdapterFuel: ArrayAdapter<String> =
+            ArrayAdapter(this, R.layout.dropdown, fuelType)
+        fuel.setAdapter(arrayAdapterFuel)
 
-            val fuelType = resources.getStringArray(R.array.fuelType)
-            val arrayAdapterFuel: ArrayAdapter<String> =
-                ArrayAdapter(this, R.layout.dropdown, fuelType)
-            val fuel = findViewById<AutoCompleteTextView>(R.id.fuel)
-            fuel.setAdapter(arrayAdapterFuel)
+        val carSegment = resources.getStringArray(R.array.carSegment)
+        val arrayAdapterSegment: ArrayAdapter<String> =
+            ArrayAdapter(this, R.layout.dropdown, carSegment)
+        segment.setAdapter(arrayAdapterSegment)
 
-            val carSegment = resources.getStringArray(R.array.carSegment)
-            val arrayAdapterSegment: ArrayAdapter<String> =
-                ArrayAdapter(this, R.layout.dropdown, carSegment)
-            val segment = findViewById<AutoCompleteTextView>(R.id.segment)
-            segment.setAdapter(arrayAdapterSegment)
-
+        cnextButton.setOnClickListener {
             val manufacturer = brandAutoCompleteTextView.text.toString()
             val carModel = modelAutoCompleteTextView.text.toString()
             val manufacturingYear = manfYear.text.toString()
@@ -146,37 +139,29 @@ class DataCarActivity : AppCompatActivity() {
             val fuelTypeSent = fuel.text.toString()
             val carSegmentSent = segment.text.toString()
 
-            val cnextButton = findViewById<Button>(R.id.cnextButton)
-            cnextButton.setOnClickListener {
-
-
-                if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegmentSent.isEmpty() ||fuelTypeSent.isEmpty() || manufacturingYear.isEmpty()    ) {
-                    Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Create an intent to start the next activity and pass data as extras
-                    val intent = Intent(this, DataStatusActivity::class.java).apply {
-                        putExtra("firstName", firstName)
-                        putExtra("lastName", lastName)
-                        putExtra("houseNo", houseNo)
-                        putExtra("city", city)
-                        putExtra("state", state)
-                        putExtra("pinCode", pinCode)
-                        putExtra("mobile", mobile)
-                        putExtra("email", email)
-                        putExtra("manufacturer", manufacturer)
-                        putExtra("carModel", carModel)
-                        putExtra("manufacturingYear", manufacturingYear)
-                        putExtra("registrationNumber", registrationNumber)
-                        putExtra("fuelType", fuelTypeSent)
-                        putExtra("carSegment", carSegmentSent)
-                    }
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegmentSent.isEmpty() || fuelTypeSent.isEmpty() || manufacturingYear.isEmpty()) {
+                Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
+            } else {
+                // Create an intent to start the next activity and pass data as extras
+                val intent = Intent(this, DataStatusActivity::class.java).apply {
+                    putExtra("firstName", firstName)
+                    putExtra("lastName", lastName)
+                    putExtra("houseNo", houseNo)
+                    putExtra("city", city)
+                    putExtra("state", state)
+                    putExtra("pinCode", pinCode)
+                    putExtra("mobile", mobile)
+                    putExtra("email", email)
+                    putExtra("manufacturer", manufacturer)
+                    putExtra("carModel", carModel)
+                    putExtra("manufacturingYear", manufacturingYear)
+                    putExtra("registrationNumber", registrationNumber)
+                    putExtra("fuelType", fuelTypeSent)
+                    putExtra("carSegment", carSegmentSent)
                 }
-
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
-
-
         }
     }
 
