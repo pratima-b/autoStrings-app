@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
@@ -105,9 +106,11 @@ class WashCarActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
 
 
-
         val brandAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.manufacturer)
         val modelAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.car_model)
+        val manfYear = findViewById<EditText>(R.id.manfYear)
+        val regNo = findViewById<EditText>(R.id.regNo)
+
 
         // Populate the brand AutoCompleteTextView
         val brandAdapter = ArrayAdapter(this, R.layout.dropdown, brands)
@@ -139,28 +142,38 @@ class WashCarActivity : AppCompatActivity() {
 
             val cnextButton = this.findViewById<Button>(R.id.cnextButton)
             cnextButton.setOnClickListener {
+
                 val manufacturer = brandAutoCompleteTextView.text.toString()
                 val carModel = modelAutoCompleteTextView.text.toString()
+                val manufacturingYear = manfYear.text.toString()
+                val registrationNumber = regNo.text.toString()
                 val fuelType = fuel.text.toString()
                 val carSegment = segment.text.toString()
 
-                // Create an intent to start the next activity and pass data as extras
-                val intent = Intent(this, activity_washplans::class.java).apply {
-                    putExtra("firstName", firstName)
-                    putExtra("lastName", lastName)
-                    putExtra("houseNo", houseNo)
-                    putExtra("city", city)
-                    putExtra("state", state)
-                    putExtra("pinCode", pinCode)
-                    putExtra("mobile", mobile)
-                    putExtra("email", email)
-                    putExtra("manufacturer", manufacturer)
-                    putExtra("carModel", carModel)
-                    putExtra("fuelType", fuelType)
-                    putExtra("carSegment", carSegment)
+
+                if (manufacturer.isEmpty() || carModel.isEmpty() || manufacturingYear.isEmpty() || registrationNumber.isEmpty() || fuelType.isEmpty() || carSegment.isEmpty()) {
+                    Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Create an intent to start the next activity and pass data as extras
+                    val intent = Intent(this, activity_washplans::class.java).apply {
+                        putExtra("firstName", firstName)
+                        putExtra("lastName", lastName)
+                        putExtra("houseNo", houseNo)
+                        putExtra("city", city)
+                        putExtra("state", state)
+                        putExtra("pinCode", pinCode)
+                        putExtra("mobile", mobile)
+                        putExtra("email", email)
+                        putExtra("manufacturer", manufacturer)
+                        putExtra("carModel", carModel)
+                        putExtra("manufacturingYear", manufacturingYear)
+                        putExtra("registrationNumber", registrationNumber)
+                        putExtra("fuelType", fuelType)
+                        putExtra("carSegment", carSegment)
+                    }
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
-                startActivity(intent)
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
             }
 

@@ -140,8 +140,17 @@ class activity_washplans : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.dropdown, paymentStatusOptions)
         paymentStatusDropdown.setAdapter(adapter)
 
+
+        val selectedPlan = selectedPlanEditText.text.toString()
+        val paymentStatus = paymentStatusDropdown.text.toString()
+
         proceedButton.setOnClickListener {
-            if (isNetworkAvailable()) {
+            if (selectedPlan.isEmpty() || paymentStatus.isEmpty()) {
+
+                showToast("Please fill all the mandatory * fields.")
+            }
+
+            else if (isNetworkAvailable()) {
                 val selectedPlan = selectedPlanEditText.text.toString()
                 val paymentStatus = paymentStatusDropdown.text.toString()
 
@@ -155,11 +164,12 @@ class activity_washplans : AppCompatActivity() {
                 val pinCode = intent.getStringExtra("pinCode")
                 val mobile = intent.getStringExtra("mobile")
                 val email = intent.getStringExtra("email")
-
                 val manufacturer = intent.getStringExtra("manufacturer")
                 val carModel = intent.getStringExtra("carModel")
                 val fuelType = intent.getStringExtra("fuelType")
                 val carSegment = intent.getStringExtra("carSegment")
+                val manufacturingYear = intent.getStringExtra("manufacturingYear")
+                val registrationNumber = intent.getStringExtra("registrationNumber")
 
                 // Store the data in Firestore
                 val db = FirebaseFirestore.getInstance()
@@ -179,6 +189,8 @@ class activity_washplans : AppCompatActivity() {
                     "carModel" to carModel,
                     "fuelType" to fuelType,
                     "carSegment" to carSegment,
+                    "registrationNumber" to registrationNumber,
+                    "manufacturingYear" to manufacturingYear,
                     "selectedPlan" to selectedPlan,
                     "paymentStatus" to paymentStatus
                 )
@@ -190,6 +202,7 @@ class activity_washplans : AppCompatActivity() {
 
                         intent.putExtra("planSelected", selectedPlan)
                         intent.putExtra("paymentStatus", paymentStatus)
+                        0
                         startActivity(intent)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     }

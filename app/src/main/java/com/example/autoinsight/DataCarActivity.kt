@@ -140,9 +140,8 @@ class DataCarActivity : AppCompatActivity() {
             segment.setAdapter(arrayAdapterSegment)
 
 
-            val cnextButton = this.findViewById<Button>(R.id.cnextButton)
+            val cnextButton = findViewById<Button>(R.id.cnextButton)
             cnextButton.setOnClickListener {
-
                 val manufacturer = brandAutoCompleteTextView.text.toString()
                 val carModel = modelAutoCompleteTextView.text.toString()
                 val manufacturingYear = manfYear.text.toString()
@@ -150,9 +149,7 @@ class DataCarActivity : AppCompatActivity() {
                 val fuelType = fuel.text.toString()
                 val carSegment = segment.text.toString()
 
-
-                // Create an intent to start the next activity and pass data as extras
-                if (manufacturer.isEmpty() || carModel.isEmpty() || manufacturingYear.isEmpty() || registrationNumber.isEmpty() || fuelType.isEmpty() || carSegment.isEmpty()) {
+                if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegment.isEmpty() ||fuelType.isEmpty() || manufacturingYear.isEmpty()    ) {
                     Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
                 } else {
                     // Create an intent to start the next activity and pass data as extras

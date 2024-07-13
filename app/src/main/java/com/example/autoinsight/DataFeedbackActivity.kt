@@ -162,7 +162,7 @@ class DataFeedbackActivity : AppCompatActivity() {
             if (selectedText.isEmpty() || edit1.text.toString().isEmpty() || edit2.text.toString().isEmpty() ||
                 (selectedText == "Yes" && (ref1.text.toString().isEmpty() || ref2.text.toString().isEmpty() || contact1.text.toString().isEmpty() || contact2.text.toString().isEmpty()))
             ) {
-                Toast.makeText(this, "Fill all the mandatory fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
