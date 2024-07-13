@@ -39,6 +39,15 @@ class WashPersonalActivity : AppCompatActivity() {
             logoutUser()
         }
 
+        val homeImageView = findViewById<ImageView>(R.id.home)
+        homeImageView.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        }
+
         val button1 = this.findViewById<ImageButton>(R.id.button1)
         button1.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, WashContactActivity::class.java)

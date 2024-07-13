@@ -44,10 +44,18 @@ class DataStatusActivity : AppCompatActivity() {
         setContentView(R.layout.activity_datastatus)
 
 
-
         val logout = findViewById<ImageView>(R.id.logout)
         logout.setOnClickListener {
             logoutUser()
+        }
+
+        val homeImageView = findViewById<ImageView>(R.id.home)
+        homeImageView.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
         }
 
         val button1 = this.findViewById<ImageButton>(R.id.button1)

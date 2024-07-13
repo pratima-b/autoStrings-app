@@ -33,6 +33,11 @@ class SelectActivity : AppCompatActivity() {
             logoutUser()
         }
 
+        val homeImageView = findViewById<ImageView>(R.id.home)
+        homeImageView.setOnClickListener {
+            Toast.makeText(this, "This is Home Page", Toast.LENGTH_SHORT).show()
+        }
+
 
         val dataCollection = this.findViewById<Button>(R.id.dataCollectionBtn)
         dataCollection.setOnClickListener {

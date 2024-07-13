@@ -46,6 +46,15 @@ class activity_washplans : AppCompatActivity() {
             logoutUser()
         }
 
+        val homeImageView = findViewById<ImageView>(R.id.home)
+        homeImageView.setOnClickListener {
+            val intent = Intent(this, SelectActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        }
+
         val fetchedImageView = findViewById<ImageView>(R.id.fetched)
         val zoomButton = findViewById<ImageButton>(R.id.zoomButton)
 
