@@ -136,7 +136,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/lastNaedsgsrme"
+                android:id="@+id/regpassWord"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
@@ -193,14 +193,14 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/lastName"
+                android:id="@+id/regmob"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/border"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
-                android:hint="+91123456789"
+                android:hint="1234567890"
                 android:inputType="number"
                 android:padding="8dp"
                 android:textColor="@color/black"
