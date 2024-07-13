@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -35,19 +36,17 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var regpasswordEditText: EditText
     private lateinit var showHide: ImageView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        showHide = findViewById<ImageView>(R.id.showHide) //
+        showHide = findViewById(R.id.showHide)
         regpasswordEditText = this.findViewById(R.id.regpassWord)
 
         showHide.setOnClickListener{
             togglePasswordVisibility()
         }
-
 
         auth = FirebaseAuth.getInstance()
 
@@ -57,10 +56,9 @@ class RegisterActivity : AppCompatActivity() {
         val lastNameEditText = findViewById<EditText>(R.id.lastNameuser)
         val mobileNumberEditText = findViewById<EditText>(R.id.regmob)
         val registerButton = findViewById<Button>(R.id.registerBtn)
-        val generateButton=findViewById<Button>(R.id.generateButton)
-        val empidUI=findViewById<TextView>(R.id.empid)
-        var empId: String? =null;
-
+        val generateButton = findViewById<Button>(R.id.generateButton)
+        val empidUI = findViewById<TextView>(R.id.empid)
+        var empId: String? = null
 
         generateButton.setOnClickListener {
             val firstName = firstNameEditText.text.toString()
@@ -82,7 +80,23 @@ class RegisterActivity : AppCompatActivity() {
             val lastName = lastNameEditText.text.toString()
             val mobileNumber = mobileNumberEditText.text.toString()
 
+            // Check if any field is empty
+            if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || mobileNumber.isEmpty() || empId.isNullOrEmpty()) {
+                Toast.makeText(this, "Please fill the mandatory * field.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
+            // Check if email is valid
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Check if mobile number is valid
+            if (!mobileNumber.matches(Regex("^\\d{10}$"))) {
+                Toast.makeText(this, "Please enter a valid 10-digit mobile number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             // Register the user with email and password
             auth.createUserWithEmailAndPassword("$username@autostrings.com", password)
@@ -91,7 +105,6 @@ class RegisterActivity : AppCompatActivity() {
                         // Registration successful
                         val user = auth.currentUser
                         if (user != null) {
-
                             // Create a user object with data
                             val userData = hashMapOf(
                                 "firstName" to firstName,
@@ -107,13 +120,12 @@ class RegisterActivity : AppCompatActivity() {
                                 .set(userData)
                                 .addOnSuccessListener {
                                     Log.d(TAG, "User data added to Firestore")
-                                    Toast.makeText(this, "Registration sucessfull", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
                                     val intent = Intent(this, LoginActivity::class.java).apply {
                                     }
                                     startActivity(intent)
                                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                                     // Redirect to the next activity or perform other actions
-
                                 }
                                 .addOnFailureListener { e ->
                                     Log.w(TAG, "Error adding user data to Firestore", e)
@@ -138,7 +150,6 @@ class RegisterActivity : AppCompatActivity() {
         val empId = firstName.take(2).toUpperCase(Locale.ROOT) +
                 lastName.takeLast(2).toUpperCase(Locale.ROOT) +
                 randomCode.toString()
-
 
         return empId
     }
