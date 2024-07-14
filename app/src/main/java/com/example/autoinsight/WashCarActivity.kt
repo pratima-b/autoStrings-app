@@ -131,7 +131,7 @@ class WashCarActivity : AppCompatActivity() {
             val fuelTypeSent = fuel.text.toString()
             val carSegmentSent = segment.text.toString()
 
-            if (manufacturer.isEmpty() || carModel.isEmpty() || manufacturingYear.isEmpty() || registrationNumber.isEmpty() || fuelTypeSent.isEmpty() || carSegmentSent.isEmpty()) {
+            if (!isValidSelection(brandAutoCompleteTextView) || !isValidSelection(modelAutoCompleteTextView) || !isValidSelection(fuel) || !isValidSelection(segment)) {
                 Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
             } else {
                 // Create an intent to start the next activity and pass data as extras
@@ -165,5 +165,10 @@ class WashCarActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         finish() // Close the current activity
+    }
+
+    private fun isValidSelection(autoCompleteTextView: AutoCompleteTextView): Boolean {
+        val selectedValue = autoCompleteTextView.text.toString()
+        return selectedValue.isNotEmpty() && selectedValue != "Select your answer"
     }
 }

@@ -287,9 +287,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
                     android:background="@drawable/border"
                     android:inputType="none"
+                    android:textColor="@color/black"
                     android:text="Select your answer"
                     style="@style/Text"
                     />
@@ -356,9 +356,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
                     android:background="@drawable/border"
                     android:inputType="none"
+                    android:textColor="@color/black"
                     android:text="Select your answer"
                     style="@style/Text"
                     />
@@ -425,9 +425,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
                     android:background="@drawable/border"
                     android:inputType="none"
+                    android:textColor="@color/black"
                     android:text="Select your answer"
                     style="@style/Text"
                     />
@@ -494,9 +494,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat"
-                    android:textColor="@color/black"
                     android:background="@drawable/border"
                     android:inputType="none"
+                    android:textColor="@color/black"
                     android:text="Select your answer"
                     style="@style/Text"
                     />

@@ -84,12 +84,6 @@ class DataCarActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         })
 
-        /*g = this.findViewById(R.id.manf)
-        h = this.findViewById(R.id.model)
-        i = this.findViewById(R.id.manfYear)
-        l = this.findViewById(R.id.regNo)
-        m = this.findViewById(R.id.fuel)*/
-
         val firstName = intent.getStringExtra("firstName")
         val lastName = intent.getStringExtra("lastName")
         val houseNo = intent.getStringExtra("houseNo")
@@ -139,7 +133,7 @@ class DataCarActivity : AppCompatActivity() {
             val fuelTypeSent = fuel.text.toString()
             val carSegmentSent = segment.text.toString()
 
-            if (registrationNumber.isEmpty() || manufacturer.isEmpty() || carModel.isEmpty() || carSegmentSent.isEmpty() || fuelTypeSent.isEmpty() || manufacturingYear.isEmpty()) {
+            if (!isValidSelection(brandAutoCompleteTextView) || !isValidSelection(modelAutoCompleteTextView) || !isValidSelection(fuel) || !isValidSelection(segment)) {
                 Toast.makeText(this, "Please fill all the mandatory * fields.", Toast.LENGTH_SHORT).show()
             } else {
                 // Create an intent to start the next activity and pass data as extras
@@ -173,5 +167,10 @@ class DataCarActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         finish() // Close the current activity
+    }
+
+    private fun isValidSelection(autoCompleteTextView: AutoCompleteTextView): Boolean {
+        val selectedValue = autoCompleteTextView.text.toString()
+        return selectedValue.isNotEmpty() && selectedValue != "Select your answer"
     }
 }
